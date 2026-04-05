@@ -1,0 +1,558 @@
+@model IEnumerable<DDHSTORE.Models.Brand>
+@{
+    ViewData["Title"] = "Quản lý thương hiệu";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    /* ================== CSS QUẢN LÝ THƯƠNG HIỆU ================== */
+    
+    /* Header */
+    .brand-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        padding: 25px 30px;
+        margin-bottom: 30px;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .brand-header h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .brand-header h2 i {
+        font-size: 2rem;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+    
+    .brand-subtitle {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        margin-top: 5px;
+    }
+    
+    /* Stats Cards */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .stat-card {
+        background: white;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: all 0.3s;
+        border-left: 4px solid;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    
+    .stat-card.total { border-left-color: #667eea; }
+    .stat-card.active { border-left-color: #10b981; }
+    .stat-card.inactive { border-left-color: #ef4444; }
+    
+    .stat-label {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #6b7280;
+        margin-bottom: 8px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #1f2937;
+    }
+    
+    /* Main Card */
+    .brand-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+    
+    .card-header-custom {
+        padding: 20px 25px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        border-bottom: 2px solid #e5e7eb;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .search-box {
+        position: relative;
+        min-width: 250px;
+    }
+    
+    .search-box i {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+    }
+    
+    .search-box input {
+        width: 100%;
+        padding: 10px 15px 10px 40px;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+    }
+    
+    .search-box input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+    }
+    
+    .btn-create {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+    
+    .btn-create:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        color: white;
+    }
+    
+    /* Table */
+    .brand-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .brand-table thead {
+        background: #f8fafc;
+    }
+    
+    .brand-table th {
+        padding: 16px 20px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: #475569;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 2px solid #e2e8f0;
+    }
+    
+    .brand-table td {
+        padding: 16px 20px;
+        vertical-align: middle;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    
+    .brand-table tbody tr {
+        transition: all 0.3s;
+    }
+    
+    .brand-table tbody tr:hover {
+        background: #fefce8;
+        transform: scale(1.01);
+    }
+    
+    /* Badge Status */
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+    
+    .status-badge.active {
+        background: #d1fae5;
+        color: #065f46;
+    }
+    
+    .status-badge.inactive {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+    
+    /* Buttons */
+    .action-btn {
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+    
+    .action-btn.edit {
+        background: #fef3c7;
+        color: #d97706;
+    }
+    
+    .action-btn.edit:hover {
+        background: #f59e0b;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .action-btn.delete {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+    
+    .action-btn.delete:hover {
+        background: #dc2626;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .action-btn.toggle {
+        background: #e0e7ff;
+        color: #4f46e5;
+    }
+    
+    .action-btn.toggle:hover {
+        background: #4f46e5;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+    }
+    
+    .empty-state i {
+        font-size: 4rem;
+        color: #cbd5e1;
+        margin-bottom: 20px;
+    }
+    
+    .empty-state h4 {
+        color: #64748b;
+        margin-bottom: 10px;
+    }
+    
+    .empty-state p {
+        color: #94a3b8;
+        margin-bottom: 20px;
+    }
+    
+    /* Alert */
+    .custom-alert {
+        border-radius: 12px;
+        padding: 15px 20px;
+        margin-bottom: 20px;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        animation: slideDown 0.3s ease;
+    }
+    
+    .custom-alert.success {
+        background: #d1fae5;
+        color: #065f46;
+        border-left: 4px solid #10b981;
+    }
+    
+    .custom-alert.error {
+        background: #fee2e2;
+        color: #991b1b;
+        border-left: 4px solid #ef4444;
+    }
+    
+    @@keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .brand-header {
+            padding: 20px;
+        }
+        
+        .brand-header h2 {
+            font-size: 1.4rem;
+        }
+        
+        .stats-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        
+        .stat-card {
+            padding: 15px;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+        }
+        
+        .card-header-custom {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .search-box {
+            width: 100%;
+        }
+        
+        .brand-table th,
+        .brand-table td {
+            padding: 12px 10px;
+            font-size: 0.85rem;
+        }
+        
+        .action-btn {
+            padding: 4px 10px;
+            font-size: 0.7rem;
+        }
+    }
+    
+    /* Pagination */
+    .pagination-custom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        border-top: 1px solid #e5e7eb;
+    }
+    
+    .pagination-custom .page-btn {
+        padding: 8px 14px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        color: #4b5563;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+    
+    .pagination-custom .page-btn:hover {
+        background: #667eea;
+        color: white;
+        border-color: #667eea;
+    }
+    
+    .pagination-custom .page-btn.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+    }
+</style>
+
+<div class="container-fluid px-4">
+    <!-- Header -->
+    <div class="brand-header">
+        <div>
+            <h2>
+                <i class="fa-solid fa-tags"></i>
+                Quản lý thương hiệu
+            </h2>
+            <div class="brand-subtitle">
+                <i class="fa-solid fa-database me-1"></i>
+                Quản lý danh sách thương hiệu hiển thị trên hệ thống
+            </div>
+        </div>
+        <a asp-action="Create" class="btn btn-create">
+            <i class="fa-solid fa-plus me-2"></i> Thêm thương hiệu mới
+        </a>
+    </div>
+
+    <!-- Alert Messages -->
+    @if (TempData["Success"] != null)
+    {
+        <div class="custom-alert success">
+            <i class="fa-solid fa-circle-check fa-lg"></i>
+            <span>@TempData["Success"]</span>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="custom-alert error">
+            <i class="fa-solid fa-circle-exclamation fa-lg"></i>
+            <span>@TempData["Error"]</span>
+        </div>
+    }
+
+    <!-- Stats Cards -->
+    @{
+        int totalBrands = Model.Count();
+        int activeBrands = Model.Count(b => b.Status == 1);
+        int inactiveBrands = totalBrands - activeBrands;
+    }
+    
+    <div class="stats-grid">
+        <div class="stat-card total">
+            <div class="stat-label">
+                <i class="fa-solid fa-tags me-1"></i> Tổng số
+            </div>
+            <div class="stat-number">@totalBrands</div>
+            <div class="stat-label mt-2">Thương hiệu</div>
+        </div>
+        <div class="stat-card active">
+            <div class="stat-label">
+                <i class="fa-solid fa-eye me-1"></i> Đang hiển thị
+            </div>
+            <div class="stat-number">@activeBrands</div>
+            <div class="stat-label mt-2">Thương hiệu</div>
+        </div>
+        <div class="stat-card inactive">
+            <div class="stat-label">
+                <i class="fa-solid fa-eye-slash me-1"></i> Đang ẩn
+            </div>
+            <div class="stat-number">@inactiveBrands</div>
+            <div class="stat-label mt-2">Thương hiệu</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="brand-card">
+        <div class="card-header-custom">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Tìm kiếm thương hiệu...">
+            </div>
+            <div class="d-flex gap-2">
+                <button onclick="window.location.reload()" class="btn btn-outline-secondary btn-sm">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="brand-table" id="brandTable">
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">ID</th>
+                        <th>Tên thương hiệu</th>
+                        <th style="width: 140px;">Trạng thái</th>
+                        <th style="width: 280px;">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="brand-row">
+                            <td class="fw-bold">#@item.BrandId</td>
+                            <td>
+                                <div class="fw-semibold">@item.BrandName</div>
+                            </td>
+                            <td>
+                                @if (item.Status == 1)
+                                {
+                                    <span class="status-badge active">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                        Đang hiển thị
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="status-badge inactive">
+                                        <i class="fa-solid fa-circle-minus"></i>
+                                        Đang ẩn
+                                    </span>
+                                }
+                            </td>
+                            <td>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <a asp-action="Edit" asp-route-id="@item.BrandId" class="action-btn edit">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                        Sửa
+                                    </a>
+                                    <a asp-action="ToggleStatus" asp-route-id="@item.BrandId" class="action-btn toggle">
+                                        <i class="fa-solid @(item.Status == 1 ? "fa-eye-slash" : "fa-eye")"></i>
+                                        @(item.Status == 1 ? "Ẩn" : "Hiện")
+                                    </a>
+                                   <a asp-action="Delete" asp-route-id="@item.BrandId" class="action-btn delete"
+   onclick='return confirm("Bạn có chắc chắn muốn xóa thương hiệu \"@item.BrandName\"?")'>
+    <i class="fa-solid fa-trash-can"></i>
+    Xóa
+</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            
+            @if (!Model.Any())
+            {
+                <div class="empty-state">
+                    <i class="fa-solid fa-tags"></i>
+                    <h4>Chưa có thương hiệu nào</h4>
+                    <p>Hãy bắt đầu bằng cách thêm thương hiệu đầu tiên</p>
+                    <a asp-action="Create" class="btn btn-create">
+                        <i class="fa-solid fa-plus me-2"></i> Thêm thương hiệu
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+        let searchValue = this.value.toLowerCase();
+        let rows = document.querySelectorAll('.brand-row');
+        
+        rows.forEach(row => {
+            let brandName = row.cells[1].innerText.toLowerCase();
+            let brandId = row.cells[0].innerText.toLowerCase();
+            
+            if (brandName.includes(searchValue) || brandId.includes(searchValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+    
+    // Auto hide alerts after 5 seconds
+    setTimeout(() => {
+        document.querySelectorAll('.custom-alert').forEach(alert => {
+            alert.style.opacity = '0';
+            setTimeout(() => alert.remove(), 300);
+        });
+    }, 5000);
+</script>

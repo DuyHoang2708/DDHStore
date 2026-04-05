@@ -1,0 +1,373 @@
+@model List<DDHSTORE.Models.Product>
+
+@{
+    ViewData["Title"] = "Trang chủ";
+    var userFavorites = ViewBag.UserFavorites as List<int> ?? new List<int>();
+   
+
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+    .home-section {
+        padding: 40px 0;
+    }
+
+    .section-title {
+        font-weight: 800;
+        font-size: 2rem;
+        color: #2c3e50;
+        position: relative;
+        display: inline-block;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        width: 60px;
+        height: 4px;
+        background: #e74c3c;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 2px;
+    }
+
+    .product-card {
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        background: #fff;
+        overflow: hidden;
+    }
+
+    .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-img-wrapper {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 4/3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        padding: 10px;
+    }
+
+    .product-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-img {
+        transform: scale(1.08);
+    }
+
+    .badge-stock {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 20px;
+        z-index: 2;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* ❤️ YÊU THÍCH */
+    .favorite-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: #fff;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: #e0e0e0; /* Default color */
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 10;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        text-decoration: none;
+    }
+
+    .favorite-btn:hover {
+        color: #e74c3c;
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(231, 76, 60, 0.25);
+    }
+
+    .favorite-btn i {
+        margin-top: 2px;
+        transition: color 0.3s ease;
+    }
+
+    .favorite-btn:hover i {
+        color: #e74c3c;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #2b2b2b;
+        margin-bottom: 12px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        height: 2.8rem; /* Rough height for 2 lines */
+        line-height: 1.4;
+    }
+
+    .product-meta {
+        font-size: 0.85rem;
+        color: #7f8c8d;
+        margin-bottom: 12px;
+    }
+
+    .product-meta span {
+        display: inline-block;
+        background: #f1f2f6;
+        padding: 4px 10px;
+        border-radius: 12px;
+        margin-right: 5px;
+        margin-bottom: 6px;
+        font-weight: 500;
+    }
+
+    .price-container {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .price {
+        color: #e74c3c;
+        font-weight: 800;
+        font-size: 1.35rem;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-custom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 10px 0;
+        transition: all 0.2s;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+    .btn-cart {
+        background-color: #f1f2f6;
+        color: #2c3e50;
+        border: 1px solid #dfe4ea;
+    }
+
+    .btn-cart:hover {
+        background-color: #dfe4ea;
+        color: #2c3e50;
+    }
+
+    .btn-buy {
+        background-color: #e74c3c;
+        color: white;
+        border: 1px solid #e74c3c;
+    }
+
+    .btn-buy:hover {
+        background-color: #c0392b;
+        border-color: #c0392b;
+        color: white;
+    }
+    
+    .btn-disabled {
+        background-color: #bdc3c7;
+        color: #fff;
+        border: 1px solid #bdc3c7;
+        cursor: not-allowed;
+    }
+
+    .product-tag {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: rgba(255,255,255,0.95);
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #34495e;
+        z-index: 2;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+</style>
+<div class="home-section container">
+    <div class="text-center">
+        <h2 class="section-title">Sản Phẩm Nổi Bật</h2>
+    </div>
+
+    <div class="row g-4">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                var qty = item.Quantity;
+                var isFav = userFavorites.Contains(item.ProductId); // Sử dụng Quantity trực tiếp từ Product
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card product-card h-100">
+
+                        <div class="product-img-wrapper">
+                            @if (qty <= 0)
+                            {
+                                <span class="badge bg-danger badge-stock"><i class="fa-solid fa-xmark me-1"></i>Hết hàng</span>
+                            }
+                            else if (qty <= 5)
+                            {
+                                <span class="badge bg-warning text-dark badge-stock"><i class="fa-solid fa-triangle-exclamation me-1"></i>Sắp hết</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success badge-stock"><i class="fa-solid fa-check me-1"></i>Còn hàng</span>
+                            }
+                            <button class="favorite-btn btn-fav @(isFav ? "active" : "")"
+                                    data-id="@item.ProductId"
+                                    title="Thêm vào yêu thích">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+
+                            <a href="@Url.Action("ProductDetail", "Home", new { id = item.ProductId })" class="d-block">
+                                <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "https://via.placeholder.com/300x200?text=No+Image" : item.ImageUrl)"
+                                     class="product-img" alt="@item.ProductName" loading="lazy" />
+                            </a>
+                                 
+                            @if (!string.IsNullOrEmpty(item.RAM))
+                            {
+                                <div class="product-tag">
+                                    <i class="fa-solid fa-microchip me-1"></i> @item.RAM
+                                </div>
+                            }
+                        </div>
+
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title" title="@item.ProductName">
+                                <a href="@Url.Action("ProductDetail", "Home", new { id = item.ProductId })" style="text-decoration:none; color:inherit;">
+                                    @item.ProductName
+                                </a>
+                            </h6>
+
+                            <div class="product-meta">
+                                @if (item.Category != null)
+                                {
+                                    <span><i class="fa-solid fa-tags me-1"></i> @item.Category.CategoryName</span>
+                                }
+                                @if (item.Brand != null)
+                                {
+                                    <span><i class="fa-solid fa-copyright me-1"></i> @item.Brand.BrandName</span>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Storage))
+                                {
+                                    <span><i class="fa-solid fa-hard-drive me-1"></i> @item.Storage</span>
+                                }
+                            </div>
+
+                            <div class="price-container mt-auto">
+                                <span class="price">@item.Price.ToString("N0") đ</span>
+                            </div>
+
+                            <div class="action-buttons">
+                                @if (qty > 0)
+                                {
+                                    <button type="button" class="btn-custom btn-cart flex-grow-1" title="Thêm vào giỏ hàng"
+                                            onclick="addToCartAjax(@item.ProductId)">
+                                        <i class="fa-solid fa-cart-shopping"></i> Giỏ
+                                    </button>
+                                    <a href="@Url.Action("Index", "Checkout", new { productId = item.ProductId, quantity = 1 })"
+                                           class="btn-custom btn-buy flex-grow-1" title="Mua ngay">
+                                        <i class="fa-solid fa-bolt"></i> Mua ngay
+                                    </a>
+                                }
+                                else
+                                {
+                                    <button class="btn-custom btn-disabled w-100" disabled>
+                                        <i class="fa-solid fa-phone me-1"></i> Liên hệ 03743899316
+                                    </button>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center text-muted py-5">
+                <i class="fa-solid fa-box-open fa-3x mb-3"></i>
+                <p>Chưa có sản phẩm nào để hiển thị.</p>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).on("click", ".btn-fav", function () {
+    var btn = $(this);
+    var productId = btn.data("id");
+
+    $.ajax({
+    url: "/Favorites/Toggle",
+    type: "POST",
+    data: { productId: productId },
+
+    xhrFields: {
+    withCredentials: true   // 🔥 BẮT BUỘC
+    },
+
+    success: function (res) {
+    if (res.status === "added") {
+    btn.addClass("active");
+    }
+    else if (res.status === "removed") {
+    btn.removeClass("active");
+    }
+    else if (res.status === "unauthorized") {
+    window.location.href = "/Account/Login";
+    }
+    },
+
+    error: function () {
+    window.location.href = "/Account/Login";
+    }
+    });
+    });
+</script>

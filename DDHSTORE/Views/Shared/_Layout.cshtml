@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - DDHSTORE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    @RenderSection("Styles", required: false)
+</head>
+
+<body>
+    @* Lấy session username *@
+   @using DDHSTORE.Helpers
+@{
+    var isLoggedIn = User.Identity.IsAuthenticated;
+    var username = User.Identity.Name;
+    var cart = Context.Session.GetObjectFromJson<List<DDHSTORE.Models.Cart>>("Cart") ?? new List<DDHSTORE.Models.Cart>();
+    var cartCount = cart.Sum(c => c.Quantity);
+    var q = Context.Request.Query["q"].ToString();
+}
+
+    <!-- HEADER -->
+    <header class="ddh-header">
+        <div class="ddh-topbar">
+            <div class="container py-3">
+                <div class="row g-2 align-items-center">
+                    <div class="col-12 col-lg-3">
+                        <a class="ddh-logo" href="/">
+                            <span class="ddh-logo-mark"><i class="fa-solid fa-bolt"></i></span>
+                            <span class="ddh-logo-text">DDHSTORE</span>
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-lg-5">
+                        <form class="ddh-search" asp-controller="Home" asp-action="Products" method="get" role="search">
+                            <i class="fa-solid fa-magnifying-glass ddh-search-icon" aria-hidden="true"></i>
+                            <input type="text"
+                                   class="form-control ddh-search-input"
+                                   name="q"
+                                   value="@q"
+                                   placeholder="Tìm sản phẩm, thương hiệu..."
+                                   autocomplete="off" />
+                            <button type="submit" class="btn btn-ddh ddh-search-btn">
+                                Tìm
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                        <div class="ddh-actions justify-content-lg-end">
+
+                <!-- USER -->
+                @if (isLoggedIn)
+                {
+                            <div class="dropdown">
+                                <a class="ddh-action ddh-action-user dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span class="ddh-action-label">@username</span>
+                                </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="Profile">
+                                    <i class="fa fa-id-card"></i> Thông tin cá nhân
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="EditProfile">
+                                    <i class="fa fa-pen-to-square"></i> Chỉnh sửa thông tin
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">
+                                    <i class="fa fa-key"></i> Đổi mật khẩu
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" asp-controller="Account" asp-action="Logout">
+                                    <i class="fa fa-sign-out-alt"></i> Đăng xuất
+                                </a>
+                            </li>
+                        </ul>
+                            </div>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login">
+                                <span class="ddh-action">
+                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                    <span class="ddh-action-label">Đăng nhập</span>
+                                </span>
+                    </a>
+                }
+
+                <!-- HEART -->
+                            <a href="/Favorites/MyFavorites" class="ddh-action">
+                                <i class="fa-regular fa-heart"></i>
+                                <span class="ddh-action-label">Yêu thích</span>
+                            </a>
+
+                <!-- CART -->
+                            <a href="/Cart" class="ddh-action ddh-action-cart" style="position: relative;">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span class="ddh-action-label">Giỏ hàng</span>
+                                <span class="ddh-cart-badge" id="cart-badge-count" style="@(cartCount == 0 ? "display:none" : "")">@cartCount</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- MENU -->
+    <nav class="ddh-menu">
+        <div class="container">
+            <a href="/">Trang chủ</a>
+            <a asp-controller="Home" asp-action="Products">Sản phẩm</a>
+            <a href="#">Điện thoại</a>
+            <a href="#">Laptop</a>
+            <a href="#">Phụ kiện</a>
+            <a href="#">Khuyến mãi</a>
+        </div>
+    </nav>
+    </header>
+
+    <!-- TOAST NOTIFICATION (global) -->
+    <div id="global-toast" style="position:fixed;top:20px;right:20px;z-index:9999;min-width:300px;"></div>
+
+    <!-- BODY -->
+    <div class="container mt-4">
+        @RenderBody()
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="ddh-footer mt-5">
+        <div class="container py-5">
+            <div class="row g-4">
+                <div class="col-12 col-md-4">
+                    <div class="ddh-footer-col ddh-footer-brand">
+                        <div class="ddh-footer-logo">
+                            <span class="ddh-logo-mark"><i class="fa-solid fa-bolt"></i></span>
+                            <span class="ddh-logo-text">DDHSTORE</span>
+                        </div>
+                        <div class="ddh-footer-desc">
+                            Website bán hàng công nghệ uy tín. Sản phẩm chính hãng, giao hàng nhanh, hỗ trợ tận tâm.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="ddh-footer-col">
+                        <div class="ddh-footer-title">Hỗ trợ</div>
+                        <a class="ddh-footer-link" href="#">Liên hệ</a>
+                        <a class="ddh-footer-link" href="#">Bảo hành</a>
+                        <a class="ddh-footer-link" href="#">Đổi trả</a>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="ddh-footer-col">
+                        <div class="ddh-footer-title">Danh mục</div>
+                        <a class="ddh-footer-link" href="#">Điện thoại</a>
+                        <a class="ddh-footer-link" href="#">Laptop</a>
+                        <a class="ddh-footer-link" href="#">Phụ kiện</a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="ddh-footer-col">
+                        <div class="ddh-footer-title">Kết nối</div>
+                        <div class="ddh-footer-social">
+                            <a class="ddh-social" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a class="ddh-social" href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                            <a class="ddh-social" href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                        </div>
+                        <div class="ddh-footer-hotline mt-auto">
+                            <div class="text-white-50 small">Hotline</div>
+                            <div class="fw-bold">1900 0000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ddh-footer-bottom mt-4 pt-3">
+                <div>© @DateTime.Now.Year DDHSTORE. All rights reserved.</div>
+                <div class="ddh-footer-mini">
+                    <a class="ddh-footer-mini-link" href="#">Chính sách</a>
+                    <span class="text-white-50">·</span>
+                    <a class="ddh-footer-mini-link" href="#">Điều khoản</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Global: update cart badge
+        function updateCartBadge(count) {
+            var badge = document.getElementById('cart-badge-count');
+            if (badge) {
+                badge.textContent = count;
+                badge.style.display = count > 0 ? '' : 'none';
+            }
+        }
+
+        // Global: show toast
+        function showGlobalToast(message, type) {
+            var container = document.getElementById('global-toast');
+            if (!container) return;
+            var icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-xmark';
+            container.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible fade show shadow" role="alert" style="border-radius:12px;font-weight:500;">' +
+                '<i class="fa-solid ' + icon + ' me-2"></i> ' + message +
+                '<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
+            setTimeout(function() {
+                var alerts = container.querySelectorAll('.alert');
+                alerts.forEach(function(a) { try { new bootstrap.Alert(a).close(); } catch(e){} });
+            }, 3000);
+        }
+
+        // Global: add to cart via AJAX
+        function addToCartAjax(productId) {
+            fetch('/Cart/AddAjax', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'id=' + productId
+            })
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                if (data.success) {
+                    updateCartBadge(data.cartCount);
+                    showGlobalToast(data.message, 'success');
+                } else {
+                    showGlobalToast(data.message, 'danger');
+                }
+            })
+            .catch(function(err) {
+                showGlobalToast('Có lỗi xảy ra!', 'danger');
+            });
+        }
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

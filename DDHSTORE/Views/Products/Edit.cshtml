@@ -1,0 +1,188 @@
+﻿@model DDHSTORE.Models.Product
+
+@{
+    ViewData["Title"] = "Cập nhật sản phẩm";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">
+                        <i class="fas fa-edit me-2"></i>Cập nhật sản phẩm
+                    </h4>
+                </div>
+
+                <div class="card-body">
+
+                    <!-- HIỂN THỊ LỖI -->
+                    <div asp-validation-summary="All" class="alert alert-danger"></div>
+
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                    }
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                    }
+
+                    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+
+                        <!-- ID -->
+                        <input type="hidden" asp-for="ProductId" />
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Tên sản phẩm *</label>
+                                <input asp-for="ProductName" class="form-control" />
+                                <span asp-validation-for="ProductName" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Price" class="form-label">Giá *</label>
+                                <input asp-for="Price" class="form-control" type="number" step="0.01" min="1" />
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- BRAND -->
+                        <div class="mb-3">
+                            <label>Thương hiệu</label>
+                            <select asp-for="BrandId" asp-items="ViewBag.Brands" class="form-select"></select>
+                        </div>
+
+                        <!-- CATEGORY -->
+                        <div class="mb-3">
+                            <label>Danh mục</label>
+                            <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-select"></select>
+                        </div>
+
+                        <!-- INVENTORY -->
+                        <div class="mb-3">
+                            <label>Số lượng tồn kho</label>
+                            <input name="Quantity" value="@Model.Quantity" class="form-control" type="number" min="0" />
+                        </div>
+
+                        <!-- SPEC -->
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label>CPU</label>
+                                <input name="CPU" value="@Model.CPU" class="form-control" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>RAM</label>
+                                <input name="RAM" value="@Model.RAM" class="form-control" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Storage</label>
+                                <input name="Storage" value="@Model.Storage" class="form-control" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Screen</label>
+                                <input name="Screen" value="@Model.Screen" class="form-control" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>OS</label>
+                                <input name="OS" value="@Model.OS" class="form-control" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Battery</label>
+                                <input name="Battery" value="@Model.Battery" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!-- COLORS -->
+                        <div class="mb-3">
+                            <label>Màu sắc</label>
+
+                            <div id="color-container">
+                                @if (ViewBag.Colors != null)
+                                {
+                                    foreach (var c in ViewBag.Colors)
+                                    {
+                                        <input name="Colors" value="@c" class="form-control mb-2" />
+                                    }
+                                }
+                            </div>
+
+                            <button type="button" class="btn btn-success btn-sm" onclick="addColor()">+ Thêm màu</button>
+                        </div>
+
+                        <!-- STATUS -->
+                        <div class="mb-3">
+                            <label asp-for="Status" class="form-label">Trạng thái</label>
+                            <select asp-for="Status" class="form-select">
+                                <option value="1">Hiển thị</option>
+                                <option value="0">Ẩn</option>
+                            </select>
+                        </div>
+
+                        <!-- DESCRIPTION -->
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Mô tả</label>
+                            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Ảnh hiện tại</label><br />
+
+                            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                            {
+                                <img id="previewImage" src="@Model.ImageUrl" width="120" class="mb-2" />
+                            }
+                            else
+                            {
+                                <img id="previewImage" src="#" style="display:none;" width="120" class="mb-2" />
+                            }
+
+                            <!-- CHỈ CHO JPG PNG -->
+                            <input type="file"
+                                   class="form-control"
+                                   name="imageFile"
+                                   id="imageInput"
+                                   accept=".jpg,.jpeg,.png" />
+
+                            
+
+                            <div id="imageError" class="text-danger mt-1"></div>
+                        </div>
+                   
+                        <!-- BUTTON -->
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Quay lại
+                            </a>
+
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-save me-2"></i>Cập nhật
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        function addColor() {
+            let html = `<input name="Colors" class="form-control mb-2" placeholder="Nhập màu..." />`;
+            document.getElementById("color-container").insertAdjacentHTML('beforeend', html);
+        }
+    </script>
+}

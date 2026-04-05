@@ -1,0 +1,127 @@
+@model DDHSTORE.Models.User
+@{
+    ViewData["Title"] = "Thông tin cá nhân";
+}
+
+@section Styles {
+    <style>
+        .profile-hero {
+            background: linear-gradient(135deg, rgba(215,0,24,0.12), rgba(255,77,79,0.12));
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 16px;
+        }
+        .profile-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #d70018;
+            color: #fff;
+            font-weight: 800;
+            letter-spacing: .5px;
+        }
+        .kv { display:flex; gap:12px; padding:10px 0; border-bottom:1px dashed rgba(0,0,0,0.08); }
+        .kv:last-child { border-bottom:none; }
+        .kv .k { min-width: 150px; color:#6c757d; font-weight:600; }
+        .kv .v { flex:1; font-weight:600; color:#212529; }
+        .pill { border-radius:999px; padding:.35rem .6rem; font-weight:700; font-size:.85rem; }
+    </style>
+}
+
+<div class="mt-4">
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success shadow-sm">@TempData["Success"]</div>
+    }
+</div>
+
+<div class="profile-hero p-4 mt-3 shadow-sm">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+        <div class="d-flex align-items-center gap-3">
+            <div class="profile-avatar">
+                @Model.Username?.Substring(0, 1).ToUpper()
+            </div>
+            <div>
+                <div class="h4 mb-1 fw-bold">@Model.Username</div>
+                <div class="text-muted">
+                    <span class="me-2"><i class="fa-solid fa-shield-halved"></i> @(Model.Role?.RoleName?.Trim() ?? "User")</span>
+                    <span class="pill @(Model.Status == 1 ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger")">
+                        @(Model.Status == 1 ? "Hoạt động" : "Khóa")
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <a asp-controller="Account" asp-action="EditProfile" class="btn btn-danger">
+                <i class="fa-solid fa-pen-to-square me-1"></i> Chỉnh sửa
+            </a>
+            <a asp-controller="Account" asp-action="ChangePassword" class="btn btn-outline-warning">
+                <i class="fa-solid fa-key me-1"></i> Đổi mật khẩu
+            </a>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fa-solid fa-house me-1"></i> Trang chủ
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mt-1">
+    <div class="col-lg-5">
+        <div class="card shadow-sm border-0" style="border-radius:16px;">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="h5 mb-0 fw-bold"><i class="fa-solid fa-user me-2 text-danger"></i>Thông tin liên hệ</div>
+                </div>
+
+                <div class="kv">
+                    <div class="k">Email</div>
+                    <div class="v">@(!string.IsNullOrWhiteSpace(Model.Email) ? Model.Email : "-")</div>
+                </div>
+                <div class="kv">
+                    <div class="k">Số điện thoại</div>
+                    <div class="v">@(!string.IsNullOrWhiteSpace(Model.Phone) ? Model.Phone : "-")</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="card shadow-sm border-0" style="border-radius:16px;">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="h5 mb-0 fw-bold"><i class="fa-solid fa-location-dot me-2 text-danger"></i>Địa chỉ</div>
+                </div>
+
+                @if (Model.Addresses != null && Model.Addresses.Any())
+                {
+                    <div class="list-group list-group-flush">
+                        @foreach (var addr in Model.Addresses)
+                        {
+                            <div class="list-group-item px-0">
+                                <div class="d-flex justify-content-between align-items-start gap-2">
+                                    <div>
+                                        <div class="fw-bold">@addr.RecipientName</div>
+                                        <div class="text-muted small">
+                                            <i class="fa-solid fa-phone me-1"></i>@addr.Phone
+                                        </div>
+                                        <div class="mt-1">
+                                            <div><span class="text-muted">Khu vực:</span> @addr.Province - @addr.District - @addr.Ward</div>
+                                            <div><span class="text-muted">Chi tiết:</span> @(!string.IsNullOrWhiteSpace(addr.Detail) ? addr.Detail : "-")</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="text-muted">Bạn chưa có địa chỉ nào.</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

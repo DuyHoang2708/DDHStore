@@ -1,0 +1,993 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\HQTCSDL\\DDHSTORE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\checkoutviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\checkoutviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\revenue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\revenue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\favorite.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\favorite.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\editprofileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\editprofileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\orders\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\orders\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\orders\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\orders\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\orderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\orderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\category\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\category\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\brand\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\brand\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\controllers\\brandcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\controllers\\brandcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\brand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\brand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\brand\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\brand\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\wwwroot\\images\\products\\e3e23ab1-3b53-496e-b5c3-a1da0b7cd56c.jpg||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\wwwroot\\images\\products\\e3e23ab1-3b53-496e-b5c3-a1da0b7cd56c.jpg||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\wwwroot\\images\\products\\ee26f236-8f73-4244-b3b1-9034c3cae466.jpg||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\wwwroot\\images\\products\\ee26f236-8f73-4244-b3b1-9034c3cae466.jpg||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\wwwroot\\images\\products\\f051067f-5054-4447-bf4a-37d3bde0ed07.jpg||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\wwwroot\\images\\products\\f051067f-5054-4447-bf4a-37d3bde0ed07.jpg||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\controllers\\favoritescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\controllers\\favoritescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\favorites\\myfavorites.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\favorites\\myfavorites.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\home\\products.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\home\\products.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\account\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\account\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\products\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\products\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\category\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\category\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\productcolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\productcolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\products\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\products\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\brand\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\brand\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\category\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\category\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\account\\accessdenied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\account\\accessdenied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\account\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\account\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\ddhstore.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\ddhstore.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\ddhstore.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\ddhstore.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|d:\\hqtcsdl\\ddhstore\\ddhstore\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7E3689C6-44DA-DC98-DD84-E04DF95BC16C}|DDHSTORE\\DDHSTORE.csproj|solutionrelative:ddhstore\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Order.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\Order.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Order.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\Order.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAYwA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:32:54.729Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Checkout\\Index.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Checkout\\Index.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Checkout\\Index.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Checkout\\Index.cshtml",
+              "ViewState": "AgIAAFIBAAAAAAAAAAAUwH4BAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-03T00:52:39.071Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CheckoutController.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\CheckoutController.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Controllers\\CheckoutController.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\CheckoutController.cs",
+              "RelativeToolTip": "DDHSTORE\\Controllers\\CheckoutController.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAADgv5IAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-03T00:51:56.055Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Revenue.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Revenue.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\Revenue.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Revenue.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\Revenue.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:33:50.914Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CheckoutViewModel.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\CheckoutViewModel.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\CheckoutViewModel.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\CheckoutViewModel.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\CheckoutViewModel.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAswCkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-03T00:51:01.02Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAACsBAAAAAAAAAAAkwEMBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-19T08:34:34.034Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Controllers\\ProductController.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "DDHSTORE\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAAJ4AAAAAAAAAAADwv64AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T00:29:13.71Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Controllers\\AccountController.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "DDHSTORE\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAYwJYBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T15:18:50.81Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Controllers\\CategoryController.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "DDHSTORE\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAEwGQAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T00:39:20.064Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\Product.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Product.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\Product.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAUwEUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:31:45.098Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "DDHSTORE\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:34:19.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Program.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Program.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Program.cs",
+              "RelativeToolTip": "DDHSTORE\\Program.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAuwC8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:28:33.734Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ee26f236-8f73-4244-b3b1-9034c3cae466.jpg -  [English (United States)] - Bitmap [520x325, 24 bit, JPG]",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\wwwroot\\images\\products\\ee26f236-8f73-4244-b3b1-9034c3cae466.jpg",
+              "RelativeDocumentMoniker": "DDHSTORE\\wwwroot\\images\\products\\ee26f236-8f73-4244-b3b1-9034c3cae466.jpg",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\wwwroot\\images\\products\\ee26f236-8f73-4244-b3b1-9034c3cae466.jpg -  [English (United States)] - Bitmap [520x325, 24 bit, JPG]",
+              "RelativeToolTip": "DDHSTORE\\wwwroot\\images\\products\\ee26f236-8f73-4244-b3b1-9034c3cae466.jpg -  [English (United States)] - Bitmap [520x325, 24 bit, JPG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2026-04-02T09:54:38.135Z",
+              "EditorCaption": " -  [English (United States)] - Bitmap [520x325, 24 bit, JPG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Favorite.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Favorite.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\Favorite.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Favorite.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\Favorite.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvx8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T08:17:09.069Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Address.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Address.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\Address.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Address.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\Address.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAwDAAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-01T13:38:27.317Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "e3e23ab1-3b53-496e-b5c3-a1da0b7cd56c.jpg -  [English (United States)] - Bitmap [520x325, 24 bit, JPG]",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\wwwroot\\images\\products\\e3e23ab1-3b53-496e-b5c3-a1da0b7cd56c.jpg",
+              "RelativeDocumentMoniker": "DDHSTORE\\wwwroot\\images\\products\\e3e23ab1-3b53-496e-b5c3-a1da0b7cd56c.jpg",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\wwwroot\\images\\products\\e3e23ab1-3b53-496e-b5c3-a1da0b7cd56c.jpg -  [English (United States)] - Bitmap [520x325, 24 bit, JPG]",
+              "RelativeToolTip": "DDHSTORE\\wwwroot\\images\\products\\e3e23ab1-3b53-496e-b5c3-a1da0b7cd56c.jpg -  [English (United States)] - Bitmap [520x325, 24 bit, JPG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2026-04-02T09:54:38.917Z",
+              "EditorCaption": " -  [English (United States)] - Bitmap [520x325, 24 bit, JPG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\ErrorViewModel.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:35:51.882Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "EditProfileViewModel.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\EditProfileViewModel.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\EditProfileViewModel.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\EditProfileViewModel.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\EditProfileViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-03T00:51:01.929Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-19T09:09:05.112Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Orders\\Create.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Orders\\Create.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Orders\\Create.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Orders\\Create.cshtml",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwCIAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-03T00:36:03.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Payment.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\Payment.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Payment.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\Payment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:33:32.679Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Category\\Index.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Category\\Index.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Category\\Index.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Category\\Index.cshtml",
+              "ViewState": "AgIAAFIBAAAAAAAAAAAowGwBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T00:40:07.928Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Orders\\Index.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Orders\\Index.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Orders\\Index.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Orders\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-03T00:36:33.126Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Home\\Privacy.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-03T00:37:15.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "BrandController.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\BrandController.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Controllers\\BrandController.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\BrandController.cs",
+              "RelativeToolTip": "DDHSTORE\\Controllers\\BrandController.cs",
+              "ViewState": "AgIAAKoAAAAAAAAAAAAqwMEAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T00:36:35.028Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "OrderDetail.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\OrderDetail.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\OrderDetail.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\OrderDetail.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\OrderDetail.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:33:17.806Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Brand.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Brand.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\Brand.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Brand.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\Brand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:31:31.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Brand\\Index.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Brand\\Index.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Brand\\Index.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Brand\\Index.cshtml",
+              "ViewState": "AgIAAOkBAAAAAAAAAAAAAPwBAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T00:36:55.602Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Brand\\Create.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Brand\\Create.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Brand\\Create.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Brand\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T00:37:22.02Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "f051067f-5054-4447-bf4a-37d3bde0ed07.jpg -  [English (United States)] - Bitmap [520x325, 24 bit, JPG]",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\wwwroot\\images\\products\\f051067f-5054-4447-bf4a-37d3bde0ed07.jpg",
+              "RelativeDocumentMoniker": "DDHSTORE\\wwwroot\\images\\products\\f051067f-5054-4447-bf4a-37d3bde0ed07.jpg",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\wwwroot\\images\\products\\f051067f-5054-4447-bf4a-37d3bde0ed07.jpg -  [English (United States)] - Bitmap [520x325, 24 bit, JPG]",
+              "RelativeToolTip": "DDHSTORE\\wwwroot\\images\\products\\f051067f-5054-4447-bf4a-37d3bde0ed07.jpg -  [English (United States)] - Bitmap [520x325, 24 bit, JPG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2026-04-02T09:54:37.285Z",
+              "EditorCaption": " -  [English (United States)] - Bitmap [520x325, 24 bit, JPG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Controllers\\CartController.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\CartController.cs",
+              "RelativeToolTip": "DDHSTORE\\Controllers\\CartController.cs",
+              "ViewState": "AgIAAI0AAAAAAAAAAAA8wKYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-01T05:38:15.449Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Cart.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Cart.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\Cart.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Cart.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\Cart.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T09:35:17.91Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Data\\AppDbContext.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "DDHSTORE\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAgwBoAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:28:08.667Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Cart\\Index.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Cart\\Index.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Cart\\Index.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Cart\\Index.cshtml",
+              "ViewState": "AgIAAGQBAAAAAAAAAAAUwHwBAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-01T05:32:37.794Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "FavoritesController.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\FavoritesController.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Controllers\\FavoritesController.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Controllers\\FavoritesController.cs",
+              "RelativeToolTip": "DDHSTORE\\Controllers\\FavoritesController.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAIwGAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T08:18:16.557Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Account\\Login.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAABEAAAAAAAAAAADwvysAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-21T03:26:23.894Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "MyFavorites.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Favorites\\MyFavorites.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Favorites\\MyFavorites.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Favorites\\MyFavorites.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Favorites\\MyFavorites.cshtml",
+              "ViewState": "AgIAAK4AAAAAAAAAAAAowLgAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-02T08:20:16.163Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Products.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Home\\Products.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Home\\Products.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Home\\Products.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Home\\Products.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAEkAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-02T09:28:17.897Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\User.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\User.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\User.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\User.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAgwDYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:30:59.139Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Account\\Profile.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Account\\Profile.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Account\\Profile.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Account\\Profile.cshtml",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAUwCMAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-21T04:17:48.055Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Account\\Register.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Account\\Register.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Account\\Register.cshtml",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwBoAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-21T03:26:01.159Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "site.css",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "DDHSTORE\\wwwroot\\css\\site.css",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "DDHSTORE\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAADIAAAAAAAAAAAAAAD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-04-01T15:07:05.563Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "_LayoutAdmin.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "ViewState": "AgIAAM4AAAAAAAAAAADwv3kAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T00:43:02.915Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "RegisterViewModel.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\RegisterViewModel.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\RegisterViewModel.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\RegisterViewModel.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\RegisterViewModel.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-01T14:04:06.112Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Products\\Create.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Products\\Create.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Products\\Create.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Products\\Create.cshtml",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAFUAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T00:29:45.673Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Category\\Create.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Category\\Create.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Category\\Create.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Category\\Create.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAQAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T00:39:42.26Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Products\\Index.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Products\\Index.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Products\\Index.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Products\\Index.cshtml",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAAAKsAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T00:30:16.949Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Brand\\Edit.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Brand\\Edit.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Brand\\Edit.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Brand\\Edit.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAABUAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T00:37:41.458Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "ProductColor.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\ProductColor.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\ProductColor.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\ProductColor.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\ProductColor.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAuwBEAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:31:59.418Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Products\\Edit.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Products\\Edit.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Products\\Edit.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Products\\Edit.cshtml",
+              "ViewState": "AgIAADAAAAAAAAAAAAAkwEgAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-01T01:13:40.945Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Category\\Edit.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Category\\Edit.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Category\\Edit.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Category\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T00:40:37.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "AccessDenied.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Account\\AccessDenied.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Account\\AccessDenied.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Account\\AccessDenied.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Account\\AccessDenied.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T01:34:54.675Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "ChangePassword.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Account\\ChangePassword.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Account\\ChangePassword.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Account\\ChangePassword.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Account\\ChangePassword.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAIBZwDEAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-21T04:11:04.998Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "Role.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Role.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\Role.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Role.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\Role.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:30:41.569Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-25T01:04:28.9Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "DDHSTORE.csproj",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\DDHSTORE.csproj",
+              "RelativeDocumentMoniker": "DDHSTORE\\DDHSTORE.csproj",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\DDHSTORE.csproj",
+              "RelativeToolTip": "DDHSTORE\\DDHSTORE.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-03-21T06:14:02.437Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "Category.cs",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "DDHSTORE\\Models\\Category.cs",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Models\\Category.cs",
+              "RelativeToolTip": "DDHSTORE\\Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:31:17.792Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "DDHSTORE",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\DDHSTORE.csproj",
+              "RelativeDocumentMoniker": "DDHSTORE\\DDHSTORE.csproj",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\DDHSTORE.csproj",
+              "RelativeToolTip": "DDHSTORE\\DDHSTORE.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-03-21T04:45:56.28Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "DDHSTORE\\Views\\Shared\\Error.cshtml",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "DDHSTORE\\Views\\Shared\\Error.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-19T08:34:50.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\appsettings.json",
+              "RelativeDocumentMoniker": "DDHSTORE\\appsettings.json",
+              "ToolTip": "D:\\HQTCSDL\\DDHSTORE\\DDHSTORE\\appsettings.json",
+              "RelativeToolTip": "DDHSTORE\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-19T08:28:33.348Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+@model DDHSTORE.Models.Brand
+
+@{
+    ViewData["Title"] = "Sửa thương hiệu";
+
+    // Chuẩn bị SelectList cho Status
+    var statusList = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Hiện", Value = "1" },
+        new SelectListItem { Text = "Ẩn", Value = "0" }
+    };
+
+    // Chọn giá trị hiện tại
+    foreach (var item in statusList)
+    {
+        if (item.Value == Model.Status.ToString())
+        {
+            item.Selected = true;
+            break;
+        }
+    }
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="ddh-page-title mb-3">
+    <div>
+        <h2>Sửa thương hiệu</h2>
+        <div class="ddh-subtitle">Cập nhật tên và trạng thái hiển thị</div>
+    </div>
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="fa-solid fa-arrow-left me-1"></i> Quay lại
+    </a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success shadow-sm">@TempData["Success"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger shadow-sm">@TempData["Error"]</div>
+}
+
+<div class="ddh-card p-4">
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="BrandId" />
+
+        <div class="mb-3">
+            <label asp-for="BrandName" class="form-label fw-bold">Tên thương hiệu</label>
+            <input asp-for="BrandName" class="form-control" />
+            <span asp-validation-for="BrandName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Trạng thái</label>
+            <select asp-for="Status" class="form-select" asp-items="statusList"></select>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-ddh">
+                <i class="fa-solid fa-floppy-disk me-1"></i> Cập nhật
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

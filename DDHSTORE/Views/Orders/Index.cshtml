@@ -1,0 +1,41 @@
+﻿@model List<DDHSTORE.Models.Order>
+@{
+    ViewData["Title"] = "Danh sách đơn hàng";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<a href="@Url.Action("Create")" class="btn btn-success mb-3">Tạo đơn hàng mới</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Khách hàng</th>
+            <th>Ngày tạo</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Sản phẩm</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderId</td>
+                <td>@order.User.Username</td>
+                <td>@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@order.TotalAmount.ToString("C")</td>
+                <td>@order.Status</td>
+                <td>
+                    <ul>
+                        @foreach (var detail in order.OrderDetails)
+                        {
+                            <li>@detail.Product.ProductName x @detail.Quantity (@detail.Price.ToString("C"))</li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

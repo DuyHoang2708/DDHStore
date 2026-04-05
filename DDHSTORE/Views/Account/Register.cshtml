@@ -1,0 +1,162 @@
+@model DDHSTORE.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Đăng ký tài khoản";
+}
+
+<div class="ddh-page-title mt-4 mb-3">
+    <div>
+        <h2>Đăng ký tài khoản</h2>
+        <div class="ddh-subtitle">Tạo tài khoản mới để mua sắm nhanh hơn</div>
+    </div>
+    <a asp-action="Login" class="btn btn-outline-secondary">
+        <i class="fa-solid fa-right-to-bracket me-1"></i> Đăng nhập
+    </a>
+</div>
+
+<div class="ddh-card p-4">
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger shadow-sm">
+            <ul class="mb-0">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <form asp-action="Register" method="post">
+        <!-- USER INFO -->
+        <div class="mb-3">
+            <label asp-for="Username" class="form-label">Tên đăng nhập</label>
+            <input asp-for="Username" class="form-control" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">Mật khẩu</label>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="form-text">
+                Ít nhất 8 ký tự, có chữ hoa, chữ thường, số và ký tự đặc biệt.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Phone" class="form-label">Số điện thoại</label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+
+        <hr />
+        <h4>Địa chỉ</h4>
+
+        <div class="mb-3">
+            <label asp-for="RecipientName" class="form-label">Người nhận</label>
+            <input asp-for="RecipientName" class="form-control" />
+            <span asp-validation-for="RecipientName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Tỉnh/Thành phố</label>
+            <select id="ProvinceDropdown" asp-for="Province" class="form-select">
+                <option value="">-- Chọn Tỉnh/Thành phố --</option>
+                @foreach (var province in ViewBag.Provinces as List<DDHSTORE.Controllers.AccountController.ProvinceApiModel>)
+                {
+                    <option value="@province.name" data-code="@province.code">@province.name</option>
+                }
+            </select>
+            <span asp-validation-for="Province" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Quận/Huyện</label>
+            <select id="DistrictDropdown" asp-for="District" class="form-select">
+                <option value="">-- Chọn Quận/Huyện --</option>
+            </select>
+            <span asp-validation-for="District" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Phường/Xã</label>
+            <select id="WardDropdown" asp-for="Ward" class="form-select">
+                <option value="">-- Chọn Phường/Xã --</option>
+            </select>
+            <span asp-validation-for="Ward" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Detail" class="form-label">Địa chỉ chi tiết</label>
+            <input asp-for="Detail" class="form-control" />
+            <span asp-validation-for="Detail" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Đăng ký</button>
+        <a asp-action="Login" class="btn btn-outline-secondary">Đã có tài khoản? Đăng nhập</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Khi chọn tỉnh, load quận
+        document.getElementById('ProvinceDropdown').addEventListener('change', function () {
+            var selectedOption = this.options[this.selectedIndex];
+            var provinceCode = selectedOption.getAttribute('data-code');
+            var districtDropdown = document.getElementById('DistrictDropdown');
+            var wardDropdown = document.getElementById('WardDropdown');
+
+            districtDropdown.innerHTML = '<option value="">-- Chọn Quận/Huyện --</option>';
+            wardDropdown.innerHTML = '<option value="">-- Chọn Phường/Xã --</option>';
+
+            if (provinceCode) {
+                fetch('https://provinces.open-api.vn/api/p/' + provinceCode + '?depth=2')
+                    .then(function (res) { return res.json(); })
+                    .then(function (data) {
+                        if (data.districts) {
+                            data.districts.forEach(function (district) {
+                                var opt = document.createElement('option');
+                                opt.value = district.name;
+                                opt.setAttribute('data-code', district.code);
+                                opt.textContent = district.name;
+                                districtDropdown.appendChild(opt);
+                            });
+                        }
+                    })
+                    .catch(function (err) { console.error('Lỗi load quận/huyện:', err); });
+            }
+        });
+
+        // Khi chọn quận, load phường
+        document.getElementById('DistrictDropdown').addEventListener('change', function () {
+            var selectedOption = this.options[this.selectedIndex];
+            var districtCode = selectedOption.getAttribute('data-code');
+            var wardDropdown = document.getElementById('WardDropdown');
+
+            wardDropdown.innerHTML = '<option value="">-- Chọn Phường/Xã --</option>';
+
+            if (districtCode) {
+                fetch('https://provinces.open-api.vn/api/d/' + districtCode + '?depth=2')
+                    .then(function (res) { return res.json(); })
+                    .then(function (data) {
+                        if (data.wards) {
+                            data.wards.forEach(function (ward) {
+                                var opt = document.createElement('option');
+                                opt.value = ward.name;
+                                opt.textContent = ward.name;
+                                wardDropdown.appendChild(opt);
+                            });
+                        }
+                    })
+                    .catch(function (err) { console.error('Lỗi load phường/xã:', err); });
+            }
+        });
+    </script>
+}
