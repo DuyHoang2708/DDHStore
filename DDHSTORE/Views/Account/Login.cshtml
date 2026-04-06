@@ -2,65 +2,262 @@
     ViewData["Title"] = "Đăng nhập";
 }
 
-<div class="row justify-content-center mt-4">
-    <div class="col-12 col-md-8 col-lg-5">
-        <div class="ddh-page-title mb-3">
-            <div>
-                <h2>@ViewData["Title"]</h2>
-                <div class="ddh-subtitle">Chào mừng bạn quay lại DDHSTORE</div>
-            </div>
+<style>
+    /* Styling for the modern login page */
+    .login-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 0;
+    }
+
+    .login-card {
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        display: flex;
+        max-width: 900px;
+        width: 100%;
+    }
+
+    .login-image-side {
+        flex: 1;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+        position: relative;
+    }
+
+    .login-image-side::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+        opacity: 0.2;
+        mix-blend-mode: overlay;
+    }
+
+    .login-image-side h2 {
+        font-weight: 800;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        z-index: 1;
+    }
+
+    .login-image-side p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        z-index: 1;
+    }
+
+    .login-form-side {
+        flex: 1;
+        padding: 4rem 3rem;
+        background: #ffffff;
+    }
+
+    .login-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+    }
+
+    .login-subtitle {
+        color: #64748b;
+        margin-bottom: 2rem;
+    }
+
+    .modern-form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .modern-form-label {
+        font-weight: 600;
+        color: #334155;
+        margin-bottom: 0.5rem;
+        display: block;
+        font-size: 0.9rem;
+    }
+
+    .modern-input-group {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .modern-input-group i {
+        position: absolute;
+        left: 1rem;
+        color: #94a3b8;
+    }
+
+    .modern-input {
+        width: 100%;
+        padding: 0.8rem 1rem 0.8rem 2.8rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: #f8fafc;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+    }
+
+    .modern-input:focus {
+        border-color: #667eea;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        outline: none;
+    }
+
+    .btn-login-main {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        color: white;
+        border: none;
+        padding: 0.8rem;
+        border-radius: 12px;
+        font-weight: 600;
+        width: 100%;
+        margin-top: 1rem;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-login-main:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
+        color: white;
+    }
+
+    .btn-login-google {
+        background: white;
+        color: #334155;
+        border: 1px solid #e2e8f0;
+        padding: 0.8rem;
+        border-radius: 12px;
+        font-weight: 600;
+        width: 100%;
+        margin-top: 1rem;
+        transition: all 0.2s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+
+    .btn-login-google:hover {
+        background: #f8fafc;
+        border-color: #cbd5e1;
+        color: #1e293b;
+    }
+
+    .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 1.5rem 0;
+        color: #94a3b8;
+        font-size: 0.9rem;
+    }
+
+    .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .divider:not(:empty)::before {
+        margin-right: .5em;
+    }
+
+    .divider:not(:empty)::after {
+        margin-left: .5em;
+    }
+
+    @@media (max-width: 768px) {
+        .login-card {
+            flex-direction: column;
+        }
+        .login-image-side {
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        .login-form-side {
+            padding: 3rem 2rem;
+        }
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-card">
+        
+        <!-- Image Side (Left) -->
+        <div class="login-image-side d-none d-md-flex">
+            <h2>DDHSTORE</h2>
+            <p>Trải nghiệm mua sắm công nghệ đỉnh cao. Chính hãng, giá tốt, dịch vụ tận tâm.</p>
         </div>
 
-        <div class="ddh-card p-4">
-            @* Hiển thị thông báo đăng ký thành công *@
+        <!-- Form Side (Right) -->
+        <div class="login-form-side">
+            <h1 class="login-title">Chào mừng trở lại!</h1>
+            <p class="login-subtitle">Vui lòng đăng nhập để tiếp tục</p>
+
             @if (TempData["Success"] != null)
             {
-                <div class="alert alert-success shadow-sm">@TempData["Success"]</div>
+                <div class="alert alert-success shadow-sm rounded-3 mb-4"><i class="fa-solid fa-circle-check me-2"></i>@TempData["Success"]</div>
             }
 
-            @* Hiển thị tất cả lỗi ModelState *@
             @if (!ViewData.ModelState.IsValid)
             {
-                <div class="alert alert-danger shadow-sm">
-                    <ul class="mb-0">
+                <div class="alert alert-danger shadow-sm rounded-3 mb-4">
+                    <ul class="mb-0 ps-3">
                         @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
                         {
-                            <li>@err.ErrorMessage</li>
+                            <li class="small">@err.ErrorMessage</li>
                         }
                     </ul>
                 </div>
             }
 
             <form asp-action="Login" method="post">
-                <div class="mb-3">
-                    <label for="username" class="form-label fw-bold">Tên đăng nhập</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                        <input name="username" id="username" class="form-control" placeholder="Nhập username" autocomplete="username" />
+                <div class="modern-form-group">
+                    <label for="username" class="modern-form-label">Tên đăng nhập</label>
+                    <div class="modern-input-group">
+                        <i class="fa-solid fa-user"></i>
+                        <input name="username" id="username" class="modern-input" placeholder="Nhập username của bạn" autocomplete="username" />
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="password" class="form-label fw-bold">Mật khẩu</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-                        <input name="password" id="password" type="password" class="form-control" placeholder="Nhập mật khẩu" autocomplete="current-password" />
+                <div class="modern-form-group">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <label for="password" class="modern-form-label mb-0">Mật khẩu</label>
+                        <a href="#" class="text-decoration-none small fw-semibold" style="color: #667eea;">Quên mật khẩu?</a>
+                    </div>
+                    <div class="modern-input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input name="password" id="password" type="password" class="modern-input" placeholder="••••••••" autocomplete="current-password" />
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-ddh w-100">
-                    <i class="fa-solid fa-right-to-bracket me-1"></i> Đăng nhập
-                </button>
+                <button type="submit" class="btn-login-main">Đăng nhập</button>
 
-                <div class="mt-3">
-                    <a asp-action="LoginGoogle" class="btn btn-soft w-100">
-                        <i class="fab fa-google me-1"></i> Đăng nhập bằng Google
-                    </a>
-                </div>
+                <div class="divider">Hoặc</div>
 
-                <div class="text-center mt-3">
-                    <span class="text-muted">Chưa có tài khoản?</span>
-                    <a asp-action="Register" class="fw-bold text-decoration-none" style="color: var(--ddh-brand);">Đăng ký</a>
+                <a asp-action="LoginGoogle" class="btn-login-google">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="18" alt="Google">
+                    Tiếp tục với Google
+                </a>
+
+                <div class="text-center mt-4">
+                    <span class="text-muted small">Chưa có tài khoản?</span>
+                    <a asp-action="Register" class="fw-bold text-decoration-none small ms-1" style="color: #667eea;">Đăng ký ngay</a>
                 </div>
             </form>
         </div>

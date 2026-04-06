@@ -9,6 +9,7 @@ namespace DDHSTORE.Models
     public class User
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("USER_ID")]
         public int UserId { get; set; }
 

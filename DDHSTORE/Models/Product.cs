@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DDHSTORE.Models
@@ -7,6 +7,7 @@ namespace DDHSTORE.Models
     public class Product
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("PRODUCT_ID")]
         public int ProductId { get; set; }
 

@@ -3,104 +3,345 @@
     ViewData["Title"] = "Đăng ký tài khoản";
 }
 
-<div class="ddh-page-title mt-4 mb-3">
-    <div>
-        <h2>Đăng ký tài khoản</h2>
-        <div class="ddh-subtitle">Tạo tài khoản mới để mua sắm nhanh hơn</div>
-    </div>
-    <a asp-action="Login" class="btn btn-outline-secondary">
-        <i class="fa-solid fa-right-to-bracket me-1"></i> Đăng nhập
-    </a>
-</div>
-
-<div class="ddh-card p-4">
-    @if (!ViewData.ModelState.IsValid)
-    {
-        <div class="alert alert-danger shadow-sm">
-            <ul class="mb-0">
-                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    <li>@error.ErrorMessage</li>
-                }
-            </ul>
-        </div>
+<style>
+    /* Styling for the modern register page (matching login) */
+    .register-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 0;
     }
 
-    <form asp-action="Register" method="post">
-        <!-- USER INFO -->
-        <div class="mb-3">
-            <label asp-for="Username" class="form-label">Tên đăng nhập</label>
-            <input asp-for="Username" class="form-control" />
-            <span asp-validation-for="Username" class="text-danger"></span>
-        </div>
+    .register-card {
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        display: flex;
+        max-width: 1000px;
+        width: 100%;
+    }
 
-        <div class="mb-3">
-            <label asp-for="Password" class="form-label">Mật khẩu</label>
-            <input asp-for="Password" type="password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-            <div class="form-text">
-                Ít nhất 8 ký tự, có chữ hoa, chữ thường, số và ký tự đặc biệt.
+    .register-image-side {
+        flex: 1;
+        background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+        position: relative;
+        max-width: 350px;
+    }
+
+    .register-image-side::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+        opacity: 0.15;
+        mix-blend-mode: overlay;
+    }
+
+    .register-image-side h2 {
+        font-weight: 800;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+        z-index: 1;
+    }
+
+    .register-image-side p {
+        font-size: 1.05rem;
+        opacity: 0.9;
+        z-index: 1;
+        line-height: 1.6;
+    }
+
+    .register-form-side {
+        flex: 2;
+        padding: 3rem;
+        background: #ffffff;
+    }
+
+    .register-title {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+    }
+
+    .register-subtitle {
+        color: #64748b;
+        margin-bottom: 2rem;
+    }
+
+    .section-divider {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 1.5rem 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #f1f5f9;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .modern-form-group {
+        margin-bottom: 1.25rem;
+    }
+
+    .modern-form-label {
+        font-weight: 600;
+        color: #334155;
+        margin-bottom: 0.4rem;
+        display: block;
+        font-size: 0.85rem;
+    }
+
+    .modern-input-group {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .modern-input-group i {
+        position: absolute;
+        left: 1rem;
+        color: #94a3b8;
+    }
+
+    .modern-input {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 2.8rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        background: #f8fafc;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+        color: #1e293b;
+    }
+    
+    select.modern-input {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1em;
+    }
+
+    .modern-input:focus {
+        border-color: #3b82f6;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        outline: none;
+    }
+
+    .btn-register-main {
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        color: white;
+        border: none;
+        padding: 0.8rem;
+        border-radius: 10px;
+        font-weight: 700;
+        width: 100%;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-register-main:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(29, 78, 216, 0.3);
+        color: white;
+    }
+
+    @@media (max-width: 768px) {
+        .register-card {
+            flex-direction: column;
+        }
+        .register-image-side {
+            max-width: 100%;
+            padding: 2rem;
+            text-align: center;
+        }
+        .register-form-side {
+            padding: 2rem;
+        }
+    }
+</style>
+
+<div class="register-container">
+    <div class="register-card">
+        
+        <!-- Image Side (Left) -->
+        <div class="register-image-side d-none d-md-flex">
+            <h2>DDHSTORE</h2>
+            <p>Tham gia cộng đồng mua sắm của chúng tôi. Hàng ngàn ưu đãi công nghệ hấp dẫn đang chờ bạn.</p>
+            
+            <div class="mt-auto">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <span class="fw-semibold">Giao hàng cực tốc</span>
+                </div>
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <span class="fw-semibold">Bảo hành chính hãng</span>
+                </div>
             </div>
         </div>
 
-        <div class="mb-3">
-            <label asp-for="Email" class="form-label">Email</label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
+        <!-- Form Side (Right) -->
+        <div class="register-form-side">
+            <h1 class="register-title">Đăng ký tài khoản</h1>
+            <p class="register-subtitle">Vui lòng điền thông tin bên dưới để tạo tài khoản mới</p>
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger shadow-sm rounded-3 mb-4">
+                    <ul class="mb-0 ps-3">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <li class="small">@error.ErrorMessage</li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <form asp-action="Register" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="modern-form-group">
+                            <label asp-for="Username" class="modern-form-label">Tên đăng nhập <span class="text-danger">*</span></label>
+                            <div class="modern-input-group">
+                                <i class="fa-solid fa-user"></i>
+                                <input asp-for="Username" class="modern-input" placeholder="Tên đăng nhập" />
+                            </div>
+                            <span asp-validation-for="Username" class="text-danger small mt-1"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="modern-form-group">
+                            <label asp-for="Password" class="modern-form-label">Mật khẩu <span class="text-danger">*</span></label>
+                            <div class="modern-input-group">
+                                <i class="fa-solid fa-lock"></i>
+                                <input asp-for="Password" type="password" class="modern-input" placeholder="Mật khẩu (Tối thiểu 8 ký tự)" />
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger small mt-1"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="modern-form-group">
+                            <label asp-for="Email" class="modern-form-label">Email <span class="text-danger">*</span></label>
+                            <div class="modern-input-group">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input asp-for="Email" class="modern-input" placeholder="example@gmail.com" />
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger small mt-1"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="modern-form-group">
+                            <label asp-for="Phone" class="modern-form-label">Số điện thoại <span class="text-danger">*</span></label>
+                            <div class="modern-input-group">
+                                <i class="fa-solid fa-phone"></i>
+                                <input asp-for="Phone" class="modern-input" placeholder="Số điện thoại liên lạc" />
+                            </div>
+                            <span asp-validation-for="Phone" class="text-danger small mt-1"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-divider"><i class="fa-solid fa-location-dot text-primary"></i> Thông tin giao hàng</div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="modern-form-group">
+                            <label asp-for="RecipientName" class="modern-form-label">Tên người nhận hàng <span class="text-danger">*</span></label>
+                            <div class="modern-input-group">
+                                <i class="fa-solid fa-address-card"></i>
+                                <input asp-for="RecipientName" class="modern-input" placeholder="Họ và tên người nhận" />
+                            </div>
+                            <span asp-validation-for="RecipientName" class="text-danger small mt-1"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="modern-form-group">
+                            <label class="modern-form-label">Tỉnh/Thành phố <span class="text-danger">*</span></label>
+                            <div class="modern-input-group">
+                                <i class="fa-solid fa-map"></i>
+                                <select id="ProvinceDropdown" asp-for="Province" class="modern-input">
+                                    <option value="">-- Chọn Tỉnh/Thành --</option>
+                                    @foreach (var province in ViewBag.Provinces as List<DDHSTORE.Controllers.AccountController.ProvinceApiModel>)
+                                    {
+                                        <option value="@province.name" data-code="@province.code">@province.name</option>
+                                    }
+                                </select>
+                            </div>
+                            <span asp-validation-for="Province" class="text-danger small mt-1"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="modern-form-group">
+                            <label class="modern-form-label">Quận/Huyện <span class="text-danger">*</span></label>
+                            <div class="modern-input-group">
+                                <i class="fa-solid fa-map-location"></i>
+                                <select id="DistrictDropdown" asp-for="District" class="modern-input">
+                                    <option value="">-- Chọn Quận/Huyện --</option>
+                                </select>
+                            </div>
+                            <span asp-validation-for="District" class="text-danger small mt-1"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="modern-form-group">
+                            <label class="modern-form-label">Phường/Xã <span class="text-danger">*</span></label>
+                            <div class="modern-input-group">
+                                <i class="fa-solid fa-map-pin"></i>
+                                <select id="WardDropdown" asp-for="Ward" class="modern-input">
+                                    <option value="">-- Chọn Phường/Xã --</option>
+                                </select>
+                            </div>
+                            <span asp-validation-for="Ward" class="text-danger small mt-1"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="modern-form-group">
+                            <label asp-for="Detail" class="modern-form-label">Địa chỉ chi tiết <span class="text-danger">*</span></label>
+                            <div class="modern-input-group">
+                                <i class="fa-solid fa-house"></i>
+                                <input asp-for="Detail" class="modern-input" placeholder="Số nhà, đường, ngõ, xóm..." />
+                            </div>
+                            <span asp-validation-for="Detail" class="text-danger small mt-1"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 row align-items-center">
+                    <div class="col-md-6 order-2 order-md-1 mt-3 mt-md-0 text-center text-md-start">
+                        <span class="text-muted small">Đã có tài khoản?</span>
+                        <a asp-action="Login" class="fw-bold text-decoration-none small ms-1" style="color: #2563eb;">Đăng nhập ngay</a>
+                    </div>
+                    <div class="col-md-6 order-1 order-md-2">
+                        <button type="submit" class="btn-register-main">Hoàn tất đăng ký</button>
+                    </div>
+                </div>
+            </form>
         </div>
-
-        <div class="mb-3">
-            <label asp-for="Phone" class="form-label">Số điện thoại</label>
-            <input asp-for="Phone" class="form-control" />
-            <span asp-validation-for="Phone" class="text-danger"></span>
-        </div>
-
-        <hr />
-        <h4>Địa chỉ</h4>
-
-        <div class="mb-3">
-            <label asp-for="RecipientName" class="form-label">Người nhận</label>
-            <input asp-for="RecipientName" class="form-control" />
-            <span asp-validation-for="RecipientName" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Tỉnh/Thành phố</label>
-            <select id="ProvinceDropdown" asp-for="Province" class="form-select">
-                <option value="">-- Chọn Tỉnh/Thành phố --</option>
-                @foreach (var province in ViewBag.Provinces as List<DDHSTORE.Controllers.AccountController.ProvinceApiModel>)
-                {
-                    <option value="@province.name" data-code="@province.code">@province.name</option>
-                }
-            </select>
-            <span asp-validation-for="Province" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Quận/Huyện</label>
-            <select id="DistrictDropdown" asp-for="District" class="form-select">
-                <option value="">-- Chọn Quận/Huyện --</option>
-            </select>
-            <span asp-validation-for="District" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Phường/Xã</label>
-            <select id="WardDropdown" asp-for="Ward" class="form-select">
-                <option value="">-- Chọn Phường/Xã --</option>
-            </select>
-            <span asp-validation-for="Ward" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="Detail" class="form-label">Địa chỉ chi tiết</label>
-            <input asp-for="Detail" class="form-control" />
-            <span asp-validation-for="Detail" class="text-danger"></span>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Đăng ký</button>
-        <a asp-action="Login" class="btn btn-outline-secondary">Đã có tài khoản? Đăng nhập</a>
-    </form>
+    </div>
 </div>
 
 @section Scripts {

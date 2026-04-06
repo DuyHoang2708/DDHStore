@@ -1,4 +1,4 @@
-﻿namespace DDHSTORE.Models;
+namespace DDHSTORE.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Payment
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Column("PAYMENT_ID")]
     public int PaymentId { get; set; }
 
@@ -16,7 +17,7 @@ public class Payment
     public string Method { get; set; }
 
     [Column("PAYMENT_DATE")]
-    public DateTime PaymentDate { get; set; }
+    public DateTime? PaymentDate { get; set; }
 
     [Column("STATUS")]
     public string Status { get; set; }

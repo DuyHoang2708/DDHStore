@@ -1,0 +1,194 @@
+@model IEnumerable<DDHSTORE.Models.Order>
+
+@{
+    ViewData["Title"] = "Quản lý đơn hàng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var currentStatus = ViewBag.CurrentStatus as string;
+}
+
+@section Styles {
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 20px rgba(30, 60, 114, 0.3);
+    }
+
+    .order-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        border: none;
+        overflow: hidden;
+    }
+
+    .status-btn {
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: all 0.2s;
+        border: 1px solid #e0e0e0;
+        background: white;
+        color: #636e72;
+        text-decoration: none;
+    }
+
+    .status-btn:hover, .status-btn.active {
+        background: #1e3c72;
+        color: white;
+        border-color: #1e3c72;
+        box-shadow: 0 4px 10px rgba(30, 60, 114, 0.2);
+    }
+
+    .table thead th {
+        background-color: #f8f9fa;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+        font-weight: 700;
+        color: #6c757d;
+        border-bottom: none;
+    }
+
+    .badge-status {
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    /* Colors for different statuses */
+    .bg-pending { background-color: #fff9db; color: #f08c00; }
+    .bg-processing { background-color: #e3f2fd; color: #1976d2; }
+    .bg-shipped { background-color: #f3e5f5; color: #7b1fa2; }
+    .bg-completed { background-color: #e8f5e9; color: #2e7d32; }
+    .bg-cancelled { background-color: #ffebee; color: #c62828; }
+
+</style>
+}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+        <h2 class="fw-bold mb-1">Quản lý đơn hàng</h2>
+        <p class="mb-0 opacity-75">Quản lý và cập nhật tiến trình đơn hàng.</p>
+    </div>
+    <div class="stats d-none d-md-flex gap-4 text-center">
+         <div>
+            <h3 class="mb-0 fw-bold">@Model.Count()</h3>
+            <small class="opacity-75">Tổng đơn</small>
+        </div>
+        <div class="border-start ps-4">
+            <h3 class="mb-0 fw-bold">@Model.Count(o => o.Status == "PENDING")</h3>
+            <small class="opacity-75">Đang chờ</small>
+        </div>
+    </div>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4 shadow-sm border-0" role="alert">
+        <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<!-- FILTERS & SEARCH -->
+<div class="row g-3 mb-4 align-items-center">
+    <div class="col-md-7">
+        <div class="d-flex gap-2 overflow-auto pb-1">
+            <a href="/AdminOrders" class="status-btn @(string.IsNullOrEmpty(currentStatus) ? "active" : "")">Tất cả</a>
+            <a href="/AdminOrders?status=PENDING" class="status-btn @(currentStatus == "PENDING" ? "active" : "")">Chờ xử lý</a>
+            <a href="/AdminOrders?status=SHIPPING" class="status-btn @(currentStatus == "SHIPPING" ? "active" : "")">Đang giao</a>
+            <a href="/AdminOrders?status=DELIVERED" class="status-btn @(currentStatus == "DELIVERED" ? "active" : "")">Đã giao</a>
+            <a href="/AdminOrders?status=COMPLETED" class="status-btn @(currentStatus == "COMPLETED" ? "active" : "")">Hoàn tất</a>
+            <a href="/AdminOrders?status=CANCELLED" class="status-btn @(currentStatus == "CANCELLED" ? "active" : "")">Đã hủy</a>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <form method="get" action="/AdminOrders" class="input-group">
+            <input type="hidden" name="status" value="@currentStatus" />
+            <input type="text" name="search" class="form-control" placeholder="Tìm ID đơn hoặc tên khách..." value="@ViewBag.Search">
+            <button class="btn btn-primary px-4" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="card order-card">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0" id="orderTable">
+            <thead>
+                <tr>
+                    <th class="ps-4">Mã đơn</th>
+                    <th>Ngày đặt</th>
+                    <th>Người dùng</th>
+                    <th class="text-end">Tổng tiền</th>
+                    <th class="text-center">Thanh toán</th>
+                    <th class="text-center">Trạng thái</th>
+                    <th class="pe-4 text-end">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td class="ps-4">
+                            <span class="fw-bold text-dark">#@order.OrderId</span>
+                        </td>
+                        <td>
+                            <div class="small text-dark">@order.OrderDate.ToString("dd/MM/yyyy")</div>
+                            <div class="small text-muted">@order.OrderDate.ToString("HH:mm")</div>
+                        </td>
+                        <td>
+                            <div class="fw-semibold text-dark">@order.User?.Username</div>
+                            <div class="small text-muted">ID: #@order.UserId</div>
+                        </td>
+                        <td class="text-end fw-bold text-danger">@order.TotalAmount.ToString("N0") ₫</td>
+                        <td class="text-center">
+                            <div class="small fw-bold @(order.Payment?.Status == "SUCCESS" ? "text-success" : "text-muted")">
+                                @(order.Payment?.Status ?? "N/A")
+                            </div>
+                            <div class="small text-muted fst-italic" style="font-size: 0.7rem;">@(order.Payment?.Method ?? "Cash")</div>
+                        </td>
+                        <td class="text-center">
+                            @{
+                                var bgClass = order.Status?.ToUpper() switch {
+                                    "PENDING" => "bg-pending",
+                                    "PROCESSING" => "bg-processing",
+                                    "SHIPPING" => "bg-shipped",
+                                    "DELIVERED" => "bg-completed",
+                                    "COMPLETED" => "bg-completed",
+                                    "CANCELLED" => "bg-cancelled",
+                                    _ => "bg-secondary"
+                                };
+                            }
+                            <span class="badge-status @bgClass">@order.Status</span>
+                        </td>
+                        <td class="pe-4 text-end">
+                            <form asp-action="UpdateStatus" method="post" class="d-inline-flex gap-2">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="orderId" value="@order.OrderId" />
+                                <select name="status" class="form-select form-select-sm" onchange="this.form.submit()" style="width: 130px; font-size: 0.8rem;">
+                                    <option value="PENDING" selected="@(order.Status == "PENDING")">Chờ xử lý</option>
+                                    <option value="PROCESSING" selected="@(order.Status == "PROCESSING")">Xử lý</option>
+                                    <option value="SHIPPING" selected="@(order.Status == "SHIPPING")">Đang giao</option>
+                                    <option value="COMPLETED" selected="@(order.Status == "COMPLETED")">Hoàn tất</option>
+                                    <option value="CANCELLED" selected="@(order.Status == "CANCELLED")">Hủy bỏ</option>
+                                </select>
+                                <a href="/AdminOrders/Details/@order.OrderId" class="btn btn-sm btn-outline-primary" title="Xem chi tiết">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

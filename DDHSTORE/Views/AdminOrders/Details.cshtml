@@ -1,0 +1,210 @@
+@model DDHSTORE.Models.Order
+
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng #" + @Model.OrderId;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section Styles {
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #243b55 0%, #141e30 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+    }
+
+    .detail-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        margin-bottom: 1.5rem;
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #f1f1f1;
+        font-weight: 700;
+        padding: 1rem 1.5rem;
+        border-radius: 15px 15px 0 0 !important;
+    }
+
+    .product-img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        border-radius: 8px;
+        border: 1px solid #f1f1f1;
+    }
+
+    .badge-status {
+        padding: 0.5rem 1.5rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 700;
+    }
+
+    .bg-pending { background-color: #f6e58d; color: #9a8616; }
+    .bg-processing { background-color: #7ed6df; color: #357c85; }
+    .bg-shipped { background-color: #e0d1ff; color: #6d42c7; }
+    .bg-completed { background-color: #badc58; color: #4e6e24; }
+    .bg-cancelled { background-color: #ff7979; color: #9c2222; }
+
+</style>
+}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+        <h2 class="fw-bold mb-1">Chi tiết đơn hàng #@Model.OrderId</h2>
+        <p class="mb-0 opacity-75">Quản lý và cập nhật tiến trình đơn hàng.</p>
+    </div>
+    <div>
+        <a href="/AdminOrders" class="btn btn-outline-light btn-sm rounded-pill px-4">
+            <i class="fas fa-arrow-left me-2"></i>Quay lại danh sách
+        </a>
+    </div>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4 shadow-sm border-0" role="alert">
+        <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="row">
+    <!-- Main Content -->
+    <div class="col-lg-8">
+        <!-- Order Items -->
+        <div class="card detail-card">
+            <div class="card-header">Sản phẩm đã đặt</div>
+            <div class="table-responsive">
+                <table class="table table-borderless align-middle mb-0">
+                    <thead class="bg-light-subtle text-secondary small fw-bold">
+                        <tr>
+                            <th class="ps-4 py-3">Sản phẩm</th>
+                            <th class="text-center">Đơn giá</th>
+                            <th class="text-center">Số lượng</th>
+                            <th class="pe-4 text-end">Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderDetails)
+                        {
+                            <tr class="border-bottom">
+                                <td class="ps-4 py-3">
+                                    <div class="d-flex align-items-center">
+                                        <img src="@(item.Product?.ImageUrl ?? "https://via.placeholder.com/60x60")" class="product-img me-3" />
+                                        <div>
+                                            <div class="fw-bold text-dark">@item.Product?.ProductName</div>
+                                            <div class="small text-muted">SKU: #PROD-@item.ProductId</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center text-secondary fw-semibold">@item.Price.ToString("N0") ₫</td>
+                                <td class="text-center">x @item.Quantity</td>
+                                <td class="pe-4 text-end fw-bold text-dark">@item.Subtotal.ToString("N0") ₫</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-end ps-4 py-4 fw-bold">Tổng thanh toán:</td>
+                            <td class="pe-4 text-end py-4 fw-bold text-danger h4">@Model.TotalAmount.ToString("N0") ₫</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <!-- User Information -->
+        <div class="card detail-card">
+            <div class="card-header">Thông tin khách hàng</div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-sm-4 text-secondary">Tên đăng nhập:</div>
+                    <div class="col-sm-8 fw-bold">@Model.User?.Username</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-4 text-secondary">Email liên hệ:</div>
+                    <div class="col-sm-8 fw-bold">@Model.User?.Email</div>
+                </div>
+                 <div class="row">
+                    <div class="col-sm-4 text-secondary">Số điện thoại:</div>
+                    <div class="col-sm-8 fw-bold">@Model.User?.Phone</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+        <!-- Status Update -->
+        <div class="card detail-card border-primary border-opacity-10">
+            <div class="card-header bg-primary bg-opacity-10 text-primary">Cập nhật trạng thái</div>
+            <div class="card-body">
+                <p class="small text-muted mb-3">Trạng thái hiện tại: 
+                    @{
+                        var bgClass = Model.Status?.ToUpper() switch {
+                            "PENDING" => "bg-pending",
+                            "PROCESSING" => "bg-processing",
+                            "SHIPPED" => "bg-shipped",
+                            "COMPLETED" => "bg-completed",
+                            "CANCELLED" => "bg-cancelled",
+                            _ => "bg-secondary"
+                        };
+                    }
+                    <span class="badge-status @bgClass ms-1">@Model.Status</span>
+                </p>
+                <form asp-action="UpdateStatus" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="orderId" value="@Model.OrderId" />
+                    <div class="mb-3">
+                        <select name="status" class="form-select status-select">
+                            <option value="PENDING" selected="@(Model.Status == "PENDING")">Chờ xử lý (PENDING)</option>
+                            <option value="PROCESSING" selected="@(Model.Status == "PROCESSING")">Đang xử lý (PROCESSING)</option>
+                            <option value="SHIPPED" selected="@(Model.Status == "SHIPPED")">Đang giao hàng (SHIPPED)</option>
+                            <option value="COMPLETED" selected="@(Model.Status == "COMPLETED")">Hoàn tất (COMPLETED)</option>
+                            <option value="CANCELLED" selected="@(Model.Status == "CANCELLED")">Hủy đơn hàng (CANCELLED)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 shadow-sm">Cập nhật ngay</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Shipping Address -->
+        <div class="card detail-card">
+            <div class="card-header">Địa chỉ giao hàng</div>
+            <div class="card-body">
+                <h6 class="fw-bold mb-1">@Model.Address?.RecipientName</h6>
+                <p class="small text-muted mb-3"><i class="fas fa-phone-alt me-1"></i> @Model.Address?.Phone</p>
+                <div class="bg-light p-3 rounded-4">
+                    <p class="small mb-1 text-dark">@Model.Address?.Detail</p>
+                    <p class="small mb-0 text-secondary">@Model.Address?.Ward, @Model.Address?.District, @Model.Address?.Province</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Info -->
+        <div class="card detail-card">
+            <div class="card-header">Thông tin thanh toán</div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-secondary small">Phương thức:</span>
+                    <span class="fw-bold small">@Model.Payment?.Method</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-secondary small">Trạng thái:</span>
+                    <span class="fw-bold small @(Model.Payment?.Status == "SUCCESS" ? "text-success" : "text-warning")">@(Model.Payment?.Status ?? "PENDING")</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class="text-secondary small">Ngày trả:</span>
+                    <span class="fw-bold small">@(Model.Payment?.PaymentDate?.ToString("dd/MM/yyyy") ?? "N/A")</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,271 @@
+@model IEnumerable<DDHSTORE.Models.Order>
+
+@{
+    ViewData["Title"] = "Bảng điều khiển Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var recentProducts = ViewBag.RecentProducts as IEnumerable<DDHSTORE.Models.Product>;
+    var recentUsers = ViewBag.RecentUsers as IEnumerable<DDHSTORE.Models.User>;
+}
+
+@section Styles {
+<style>
+    .dashboard-header {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        color: white;
+        padding: 2.5rem;
+        border-radius: 15px;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 4px 20px rgba(17, 153, 142, 0.3);
+    }
+
+    .stat-card {
+        border: none;
+        border-radius: 15px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        color: white;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .stat-card i {
+        position: absolute;
+        right: -10px;
+        bottom: -10px;
+        font-size: 5rem;
+        opacity: 0.15;
+    }
+
+    .bg-revenue { background: linear-gradient(135deg, #FF512F 0%, #DD2476 100%); }
+    .bg-orders { background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%); }
+    .bg-users { background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%); }
+    .bg-stock { background: linear-gradient(135deg, #f12711 0%, #f5af19 100%); }
+
+    .card-title-sm {
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        opacity: 0.9;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 800;
+        margin: 0.5rem 0;
+    }
+
+    .recent-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        margin-bottom: 2rem;
+    }
+
+    .recent-header {
+        background: white;
+        border-bottom: 1px solid #f1f1f1;
+        padding: 1.25rem 1.5rem;
+        font-weight: 700;
+        border-radius: 15px 15px 0 0 !important;
+    }
+
+    .table thead th {
+        background-color: #fcfcfc;
+        border-bottom: 1px solid #f1f1f1;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #6c757d;
+    }
+
+    .product-img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        background: #f8f9fa;
+        border-radius: 6px;
+    }
+</style>
+}
+
+<div class="dashboard-header">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="fw-bold mb-1">Xin chào, Admin!</h1>
+            <p class="mb-0 opacity-75">Chào mừng quay lại hệ thống quản trị DDHSTORE. Hệ thống hoạt động bình thường.</p>
+        </div>
+        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+            <div class="bg-white bg-opacity-25 d-inline-block px-4 py-2 rounded-pill">
+                <i class="far fa-calendar-alt me-2"></i> @DateTime.Now.ToString("dd MMMM, yyyy")
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- STATS SUMMARY -->
+<div class="row g-4 mb-5">
+    <div class="col-md-3">
+        <div class="stat-card bg-revenue">
+            <div class="card-title-sm">Tổng doanh thu</div>
+            <div class="stat-value">@ViewBag.TotalRevenue.ToString("N0") ₫</div>
+            <div class="small">Đơn hàng đã hoàn tất</div>
+            <i class="fas fa-coins text-white"></i>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card bg-orders">
+            <div class="card-title-sm">Tổng đơn hàng</div>
+            <div class="stat-value">@ViewBag.TotalOrders</div>
+            <div class="small">Lượt giao dịch hệ thống</div>
+            <i class="fas fa-shopping-cart text-white"></i>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card bg-users">
+            <div class="card-title-sm">Thành viên</div>
+            <div class="stat-value">@ViewBag.TotalUsers</div>
+            <div class="small">Tài khoản đăng ký mới</div>
+            <i class="fas fa-users text-white"></i>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card bg-stock">
+            <div class="card-title-sm">Sắp hết hàng</div>
+            <div class="stat-value">@ViewBag.LowStockCount</div>
+            <div class="small">Tồn kho dưới 10 sản phẩm</div>
+            <i class="fas fa-exclamation-triangle text-white"></i>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- RECENT ORDERS -->
+    <div class="col-lg-8">
+        <div class="card recent-card">
+            <div class="recent-header d-flex justify-content-between align-items-center">
+                <span>Đơn hàng mới nhất</span>
+                <a href="/AdminOrders" class="btn btn-sm btn-link text-primary p-0 fw-bold">Xem tất cả</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th class="ps-4">ID</th>
+                            <th>Khách hàng</th>
+                            <th class="text-end">Tổng</th>
+                            <th class="text-center">Trạng thái</th>
+                            <th class="text-center">Ngày</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td class="ps-4 fw-bold text-dark">#@order.OrderId</td>
+                                <td>@order.User?.Username</td>
+                                <td class="text-end fw-bold text-danger">@order.TotalAmount.ToString("N0") ₫</td>
+                                <td class="text-center">
+                                    <span class="badge @(order.Status == "COMPLETED" ? "bg-success" : "bg-warning") text-white rounded-pill px-3" style="font-size: 0.7rem;">
+                                        @order.Status
+                                    </span>
+                                </td>
+                                <td class="text-center small text-muted">@order.OrderDate.ToString("dd/MM HH:mm")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="col-lg-4">
+        <div class="card recent-card bg-light border-0">
+            <div class="card-body p-4">
+                <h6 class="fw-bold mb-4 text-dark">Thao tác nhanh</h6>
+                <div class="d-grid gap-2">
+                    <a href="/Products/Create" class="btn btn-white text-dark shadow-sm border-0 text-start ps-3 py-2"><i class="fas fa-plus-circle text-primary me-2"></i> Thêm sản phẩm mới</a>
+                    <a href="/AdminUsers" class="btn btn-white text-dark shadow-sm border-0 text-start ps-3 py-2"><i class="fas fa-user-plus text-success me-2"></i> Quản lý thành viên</a>
+                    <a href="/AdminOrders" class="btn btn-white text-dark shadow-sm border-0 text-start ps-3 py-2"><i class="fas fa-file-invoice text-info me-2"></i> Kiểm tra tất cả đơn hàng</a>
+                    <a href="/AdminDashboard/ExportRevenue" class="btn btn-white text-dark shadow-sm border-0 text-start ps-3 py-2"><i class="fas fa-file-excel text-success me-2"></i> Xuất doanh thu ra Excel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- RECENT USERS -->
+    <div class="col-lg-6">
+        <div class="card recent-card">
+            <div class="recent-header d-flex justify-content-between align-items-center">
+                <span>Thành viên mới</span>
+                <a href="/AdminUsers" class="btn btn-sm btn-link text-primary p-0 fw-bold">Xem tất cả</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th class="ps-3">Người dùng</th>
+                            <th>Liên hệ</th>
+                            <th class="text-center">Vai trò</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in recentUsers)
+                        {
+                            <tr>
+                                <td class="ps-3">
+                                    <div class="fw-bold text-dark small">@user.Username</div>
+                                    <div class="text-muted small">ID: #@user.UserId</div>
+                                </td>
+                                <td>
+                                    <div class="small">@user.Email</div>
+                                    <div class="text-muted small">@user.Phone</div>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge @(user.RoleId == 1 ? "bg-danger" : "bg-info") text-white rounded-pill px-2" style="font-size: 0.65rem;">
+                                        @user.Role?.RoleName
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- RECENT PRODUCTS -->
+    <div class="col-lg-6">
+        <div class="card recent-card">
+             <div class="recent-header d-flex justify-content-between align-items-center">
+                <span>Sản phẩm mới thêm</span>
+                <a href="/Products" class="btn btn-sm btn-link text-primary p-0 fw-bold">Xem tất cả</a>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush rounded-bottom">
+                    @foreach (var p in recentProducts)
+                    {
+                        <div class="list-group-item d-flex align-items-center p-3">
+                            <img src="@p.ImageUrl" class="product-img me-3" />
+                            <div class="flex-grow-1 overflow-hidden">
+                                <div class="fw-bold text-dark text-truncate small">@p.ProductName</div>
+                                <div class="text-danger fw-semibold small">@p.Price.ToString("N0") ₫</div>
+                            </div>
+                            <div class="text-muted small">#@p.ProductId</div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Order
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Column("ORDER_ID")]
     public int OrderId { get; set; }
 
@@ -22,7 +23,7 @@ public class Order
     public string Status { get; set; }
 
     [Column("ADDRESS_ID")]
-    public int AddressId { get; set; }
+    public int? AddressId { get; set; }
 
     public User User { get; set; }
     public Address Address { get; set; }

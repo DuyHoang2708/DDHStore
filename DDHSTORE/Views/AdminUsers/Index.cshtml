@@ -1,0 +1,213 @@
+@model IEnumerable<DDHSTORE.Models.User>
+
+@{
+    ViewData["Title"] = "Quản lý người dùng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var roles = ViewBag.Roles as IEnumerable<DDHSTORE.Models.Role>;
+}
+
+@section Styles {
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 20px rgba(255, 65, 108, 0.3);
+    }
+
+    .user-table-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        border: none;
+        overflow: hidden;
+    }
+
+    .table thead th {
+        background-color: #f8f9fa;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+        font-weight: 700;
+        color: #6c757d;
+        border-bottom: none;
+        padding: 1rem;
+    }
+
+    .table tbody td {
+        padding: 1.25rem 1rem;
+        vertical-align: middle;
+        border-bottom: 1px solid #f1f1f1;
+    }
+
+    .user-avatar {
+        width: 45px;
+        height: 45px;
+        background-color: #f1f2f6;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #FF416C;
+        font-size: 1.2rem;
+    }
+
+    .status-badge {
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .badge-active { background-color: #eafaf1; color: #2ecc71; }
+    .badge-blocked { background-color: #fdeded; color: #e74c3c; }
+
+    .role-select {
+        border-radius: 8px;
+        font-size: 0.85rem;
+        padding: 0.3rem 0.5rem;
+        border: 1px solid #e0e0e0;
+    }
+
+    .btn-action {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        transition: all 0.2s;
+        border: none;
+        color: white;
+    }
+
+    .btn-toggle { background-color: #f1f2f6; color: #576574; }
+    .btn-toggle:hover { background-color: #e1e2e6; color: #2d3436; }
+</style>
+}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+        <h2 class="fw-bold mb-1">Quản lý người dùng</h2>
+        <p class="mb-0 opacity-75">Danh sách toàn bộ thành viên trong hệ thống DDHSTORE.</p>
+    </div>
+    <div class="stats d-none d-md-flex gap-4">
+        <div class="text-center">
+            <h3 class="mb-0 fw-bold">@Model.Count()</h3>
+            <small class="opacity-75">Thành viên</small>
+        </div>
+        <div class="text-center border-start ps-4">
+            <h3 class="mb-0 fw-bold">@Model.Count(u => u.Status == 1)</h3>
+            <small class="opacity-75">Đang hoạt động</small>
+        </div>
+    </div>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show rounded-3 mb-4 shadow-sm border-0" role="alert">
+        <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="card user-table-card">
+    <div class="card-header bg-white py-3">
+        <div class="row align-items-center">
+            <div class="col">
+                <h5 class="mb-0 fw-bold">Danh sách người dùng</h5>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text bg-light border-0"><i class="fas fa-search"></i></span>
+                    <input type="text" id="userSearch" class="form-control border-0 bg-light" placeholder="Tìm tên, email, sđt...">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover mb-0" id="userTable">
+            <thead>
+                <tr>
+                    <th class="ps-4">Thông tin người dùng</th>
+                    <th>Liên hệ</th>
+                    <th>Vai trò</th>
+                    <th class="text-center">Trạng thái</th>
+                    <th class="pe-4 text-end">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td class="ps-4">
+                            <div class="d-flex align-items-center">
+                                <div class="user-avatar me-3">
+                                    @user.Username.Substring(0, 1).ToUpper()
+                                </div>
+                                <div>
+                                    <div class="fw-bold text-dark">@user.Username</div>
+                                    <div class="small text-muted">ID: #@user.UserId</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="small text-dark fw-semibold">@user.Email</div>
+                            <div class="small text-muted">@user.Phone</div>
+                        </td>
+                        <td>
+                            <form asp-action="ChangeRole" method="post" class="d-flex align-items-center gap-2">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="userId" value="@user.UserId" />
+                                <select name="roleId" class="form-select form-select-sm role-select" onchange="this.form.submit()">
+                                    @foreach (var role in roles)
+                                    {
+                                        <option value="@role.RoleId" selected="@(user.RoleId == role.RoleId)">@role.RoleName</option>
+                                    }
+                                </select>
+                            </form>
+                        </td>
+                        <td class="text-center">
+                            @if (user.Status == 1)
+                            {
+                                <span class="status-badge badge-active">Hoạt động</span>
+                            }
+                            else
+                            {
+                                <span class="status-badge badge-blocked">Bị khóa</span>
+                            }
+                        </td>
+                        <td class="pe-4 text-end">
+                            <form asp-action="ToggleStatus" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@user.UserId" />
+                                <button type="submit" class="btn btn-action btn-toggle" title="@(user.Status == 1 ? "Khóa tài khoản" : "Mở khóa tài khoản")">
+                                    <i class="fas @(user.Status == 1 ? "fa-user-slash" : "fa-user-check")"></i>
+                                </button>
+                            </form>
+                            <button class="btn btn-action bg-primary ms-1" title="Chi tiết đơn hàng" onclick="location.href='/AdminOrders?userId=@user.UserId'">
+                                <i class="fas fa-shopping-bag"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    $(document).ready(function() {
+        $("#userSearch").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#userTable tbody tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+}

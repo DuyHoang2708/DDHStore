@@ -1,136 +1,320 @@
-﻿@model DDHSTORE.Models.Product
+@model DDHSTORE.Models.Product
 
 @{
     ViewData["Title"] = "Thêm sản phẩm mới";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-   
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0"><i class="fas fa-plus me-2"></i>Thêm sản phẩm mới</h4>
-                </div>
-                <div class="card-body">
+@section Styles {
+    <style>
+        .page-header-lux {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-                    @if (TempData["ErrorMessage"] != null)
-                    {
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fas fa-exclamation-triangle me-2"></i>@TempData["ErrorMessage"]
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    }
+        .page-header-lux h2 {
+            font-weight: 800;
+            margin: 0;
+            font-size: 1.8rem;
+            letter-spacing: -0.02em;
+        }
 
-                    <form asp-action="Create" method="post" enctype="multipart/form-data">
-                        @Html.AntiForgeryToken()
+        .btn-lux-light {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+        }
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label">Tên sản phẩm *</label>
-                                    <input type="text" class="form-control" name="ProductName" required />
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="Price" class="form-label">Giá *</label>
-                                <input asp-for="Price" class="form-control" type="number" step="0.01" min="1" />
-                                <span asp-validation-for="Price" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <select asp-for="BrandId" asp-items="ViewBag.Brands" class="form-select" required>
-                            <option value="">Chọn thương hiệu</option>
-                        </select>
+        .btn-lux-light:hover {
+            background: white;
+            color: #0f172a;
+        }
 
-                        <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-select" required>
-                            <option value="">Chọn danh mục</option>
-                        </select>
-                      
-                        <div class="mb-3">
-                            <label>Số lượng tồn kho</label>
-                            <input name="Quantity" class="form-control" type="number" min="0" value="0" />
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label>CPU</label>
-                                <input name="CPU" class="form-control" />
-                            </div>
+        .form-card-lux {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f1f5f9;
+            padding: 2.5rem;
+        }
 
-                            <div class="col-md-6 mb-3">
-                                <label>RAM</label>
-                                <input name="RAM" class="form-control" />
-                            </div>
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+            margin-left: 10px;
+        }
 
-                            <div class="col-md-6 mb-3">
-                                <label>Storage</label>
-                                <input name="Storage" class="form-control" />
-                            </div>
+        .lux-label {
+            font-weight: 600;
+            color: #475569;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
 
-                            <div class="col-md-6 mb-3">
-                                <label>Screen</label>
-                                <input name="Screen" class="form-control" />
-                            </div>
+        .lux-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #f8fafc;
+            color: #1e293b;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
 
-                            <div class="col-md-6 mb-3">
-                                <label>OS</label>
-                                <input name="OS" class="form-control" />
-                            </div>
+        .lux-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
 
-                            <div class="col-md-6 mb-3">
-                                <label>Battery</label>
-                                <input name="Battery" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="mb-3">
-                                <label>Màu sắc</label>
-                                <select asp-for="Colors" asp-items="ViewBag.Colors" class="form-select" multiple></select>
-                                <small class="text-muted">Bạn có thể chọn nhiều màu bằng Ctrl</small>
-                            </div>
+        .lux-input[disabled], .lux-input[readonly] {
+            background: #e2e8f0;
+            border-color: #cbd5e1;
+            color: #64748b;
+        }
 
-                            <div id="color-container">
-                                <input name="Colors" class="form-control mb-2" placeholder="Nhập màu..." />
-                            </div>
+        .btn-lux-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-                            <button type="button" class="btn btn-success btn-sm" onclick="addColor()">+ Thêm màu</button>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label asp-for="Status" class="form-label">Trạng thái *</label>
-                                    <select asp-for="Status" class="form-select" required>
-                                        <option value="1">Hiển thị</option>
-                                        <option value="0">Ẩn</option>
-                                    </select>
-                                    <span asp-validation-for="Status" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
+        .btn-lux-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+            color: white;
+        }
 
-                        <div class="mb-3">
-                            <label asp-for="Description" class="form-label">Mô tả</label>
-                            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Nhập mô tả sản phẩm..."></textarea>
-                            <span asp-validation-for="Description" class="text-danger"></span>
-                        </div>
+        .color-tag {
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+            padding: 0.3rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
 
-                        <div class="mb-3">
-                            <label class="form-label">Hình ảnh sản phẩm</label>
-                            <input type="file" class="form-control" name="imageFile" accept="image/*" />
-                            <small class="form-text text-muted">Chỉ chấp nhận file hình ảnh (JPG, PNG, GIF)</small>
-                        </div>
+        .color-add-btn {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px dashed #cbd5e1;
+            padding: 0.3rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
 
-                        <div class="d-flex justify-content-between">
-                            <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Quay lại</a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save me-2"></i>Tạo sản phẩm
-                            </button>
-                        </div>
-                    </form>
+        .color-add-btn:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        textarea.lux-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+    </style>
+}
+
+<div class="page-header-lux">
+    <div>
+        <h2>Thêm sản phẩm mới</h2>
+        <div class="text-white-50 mt-1"><i class="fa-solid fa-box-open me-2"></i>Nhập thông tin chi tiết để tạo sản phẩm</div>
+    </div>
+    <a asp-action="Index" class="btn-lux-light">
+        <i class="fas fa-arrow-left"></i> Quay lại Danh sách
+    </a>
+</div>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show rounded-4 shadow-sm border-0" role="alert">
+        <i class="fas fa-exclamation-triangle me-2"></i>@TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="form-card-lux">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+
+        <!-- THÔNG TIN CƠ BẢN -->
+        <h3 class="section-title"><i class="fa-solid fa-circle-info text-primary"></i> Thông tin cơ bản</h3>
+        <div class="row g-4 mb-5">
+            <div class="col-md-8">
+                <label class="lux-label">Tên sản phẩm <span class="text-danger">*</span></label>
+                <input type="text" class="lux-input" name="ProductName" placeholder="Ví dụ: iPhone 15 Pro Max 256GB" required />
+            </div>
+            
+            <div class="col-md-4">
+                <label asp-for="Price" class="lux-label">Giá bán (₫) <span class="text-danger">*</span></label>
+                <input asp-for="Price" class="lux-input text-success fw-bold" type="number" step="0.01" min="1" placeholder="Vd: 29990000" />
+                <span asp-validation-for="Price" class="text-danger small mt-1 d-block"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="BrandId" class="lux-label">Thương hiệu <span class="text-danger">*</span></label>
+                <select asp-for="BrandId" asp-items="ViewBag.Brands" class="lux-input form-select" required>
+                    <option value="">-- Chọn thương hiệu --</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="CategoryId" class="lux-label">Danh mục <span class="text-danger">*</span></label>
+                <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="lux-input form-select" required>
+                    <option value="">-- Chọn danh mục --</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label class="lux-label">Số lượng tồn kho</label>
+                <div class="position-relative">
+                    <input name="Quantity" class="lux-input" type="number" min="0" value="0" />
+                    <i class="fa-solid fa-boxes-stacked position-absolute text-muted" style="right: 15px; top: 50%; transform: translateY(-50%);"></i>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- CẤU HÌNH CHI TIẾT -->
+        <h3 class="section-title"><i class="fa-solid fa-microchip text-info"></i> Cấu hình kỹ thuật</h3>
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <label class="lux-label">CPU (Bộ vi xử lý)</label>
+                <input name="CPU" class="lux-input" placeholder="Vd: Apple A17 Pro" />
+            </div>
+
+            <div class="col-md-4">
+                <label class="lux-label">RAM</label>
+                <input name="RAM" class="lux-input" placeholder="Vd: 8GB" />
+            </div>
+
+            <div class="col-md-4">
+                <label class="lux-label">Bộ nhớ trong (Storage)</label>
+                <input name="Storage" class="lux-input" placeholder="Vd: 256GB NVMe" />
+            </div>
+
+            <div class="col-md-4">
+                <label class="lux-label">Màn hình (Screen)</label>
+                <input name="Screen" class="lux-input" placeholder="Vd: 6.7 inch Super Retina XDR" />
+            </div>
+
+            <div class="col-md-4">
+                <label class="lux-label">Hệ điều hành (OS)</label>
+                <input name="OS" class="lux-input" placeholder="Vd: iOS 17" />
+            </div>
+
+            <div class="col-md-4">
+                <label class="lux-label">Dung lượng Pin (Battery)</label>
+                <input name="Battery" class="lux-input" placeholder="Vd: 4422 mAh" />
+            </div>
+        </div>
+
+        <!-- PHÂN LOẠI & HÌNH ẢNH -->
+        <h3 class="section-title"><i class="fa-solid fa-palette text-warning"></i> Trưng bày & Phân loại</h3>
+        <div class="row g-4 mb-5">
+            <div class="col-md-6">
+                <label class="lux-label">Màu sắc hiện có</label>
+                <div class="p-3 bg-light rounded-4 border">
+                    <select asp-for="Colors" asp-items="ViewBag.Colors" class="lux-input form-select mb-3" multiple style="height: 100px; display: none;"></select>
+                    
+                    <div id="color-container" class="mb-3 d-flex flex-column gap-2">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-droplet text-info"></i></span>
+                            <input name="Colors" class="lux-input border-start-0 ps-0" placeholder="Nhập tên màu (Vd: Titan tự nhiên)..." />
+                        </div>
+                    </div>
+                    
+                    <div class="text-end">
+                        <button type="button" class="color-add-btn" onclick="addColor()">
+                            <i class="fa-solid fa-plus"></i> Thêm ô màu khác
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label class="lux-label">Trạng thái <span class="text-danger">*</span></label>
+                <select asp-for="Status" class="lux-input form-select mb-4" required>
+                    <option value="1">Hiển thị ngay trên website</option>
+                    <option value="0">Tạm ẩn</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+
+                <label class="lux-label">Hình ảnh sản phẩm</label>
+                <div class="p-3 border rounded-4 bg-light text-center" style="border-style: dashed !important;">
+                    <i class="fa-solid fa-cloud-arrow-up text-muted mb-2" style="font-size: 2rem;"></i>
+                    <input type="file" class="form-control" name="imageFile" accept="image/*" />
+                    <small class="form-text text-muted mt-2 d-block">Định dạng hỗ trợ: JPG, PNG, WEBP</small>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="Description" class="lux-label">Mô tả chi tiết</label>
+                <textarea asp-for="Description" class="lux-input" placeholder="Viết bài giới thiệu hấp dẫn về tính năng sản phẩm..."></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+
+        <hr class="my-4" style="border-color: #e2e8f0;">
+
+        <div class="d-flex justify-content-end gap-3">
+            <a asp-action="Index" class="btn btn-light px-4 rounded-pill fw-bold" style="color: #64748b; border: 1px solid #e2e8f0;">Hủy bỏ</a>
+            <button type="submit" class="btn-lux-primary rounded-pill px-5">
+                <i class="fa-solid fa-check"></i> Lưu Sản Phẩm
+            </button>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
@@ -139,8 +323,14 @@
         setTimeout(function () {
             $('.alert').fadeOut('slow');
         }, 5000);
-             function addColor() {
-            let html = `<input name="Colors" class="form-control mb-2" placeholder="Nhập màu..." />`;
+        
+        function addColor() {
+            let html = `
+            <div class="input-group">
+                <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-droplet text-info"></i></span>
+                <input name="Colors" class="lux-input border-start-0 ps-0" placeholder="Nhập tên màu..." />
+            </div>
+            `;
             document.getElementById("color-container").insertAdjacentHTML('beforeend', html);
         }
     </script>

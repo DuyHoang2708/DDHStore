@@ -1,234 +1,466 @@
-﻿@model IEnumerable<DDHSTORE.Models.Product>
+@model IEnumerable<DDHSTORE.Models.Product>
 
 @{
     ViewData["Title"] = "Quản lý sản phẩm";
-   Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 @section Styles {
-<style>
-    .page-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 2rem;
-        border-radius: 10px;
-        margin-bottom: 2rem;
-    }
+    <style>
+        .page-header-lux {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .stats-card {
-        background: white;
-        border-radius: 10px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        margin-bottom: 1.5rem;
-        text-align: center;
-    }
+        .page-header-lux h2 {
+            font-weight: 800;
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: -0.02em;
+        }
 
-    .product-table {
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        overflow: hidden;
-    }
+        .btn-lux-light {
+            background: white;
+            color: #0f172a;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    .product-image {
-        width: 60px;
-        height: 60px;
-        object-fit: cover;
-        border-radius: 8px;
-    }
+        .btn-lux-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+            color: #475569;
+        }
 
-    .status-badge {
-        padding: 5px 10px;
-        border-radius: 20px;
-        font-size: 12px;
-    }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
 
-    .status-presently {
-        background: #d4edda;
-        color: #155724;
-    }
+        .stat-card-lux {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .status-hidden {
-        background: #f8d7da;
-        color: #721c24;
-    }
+        .stat-card-lux::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--stat-color, #3b82f6);
+            border-radius: 4px 0 0 4px;
+        }
 
-    .stock-ok { color: green; }
-    .stock-low { color: orange; }
-    .stock-warning { color: red; }
+        .stat-value-lux {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e293b;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
 
-    .action-buttons {
-        display: flex;
-        gap: 5px;
-    }
-</style>
+        .stat-label-lux {
+            color: #64748b;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-icon-lux {
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            font-size: 5rem;
+            opacity: 0.04;
+            color: var(--stat-color, #3b82f6);
+        }
+
+        .table-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .table-toolbar {
+            padding: 1.5rem;
+            border-bottom: 1px solid #f8fafc;
+            background: #ffffff;
+        }
+
+        .search-wrapper {
+            position: relative;
+            max-width: 400px;
+        }
+
+        .search-wrapper i {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+
+        .search-input-lux {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #f8fafc;
+            color: #334155;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .search-input-lux:focus {
+            outline: none;
+            border-color: #6366f1;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .table-lux {
+            margin-bottom: 0;
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .table-lux thead th {
+            background: #f8fafc;
+            color: #64748b;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 1.25rem 1rem;
+            border-bottom: 2px solid #e2e8f0;
+            white-space: nowrap;
+        }
+
+        .table-lux tbody td {
+            padding: 1.25rem 1rem;
+            vertical-align: middle;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        .table-lux tbody tr {
+            transition: background-color 0.2s;
+        }
+
+        .table-lux tbody tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .prod-img-lux {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            border-radius: 10px;
+            background: #f1f5f9;
+            padding: 4px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .prod-img-placeholder {
+            width: 55px;
+            height: 55px;
+            border-radius: 10px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            border: 1px dashed #cbd5e1;
+        }
+
+        .prod-name-lux {
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        .prod-desc-lux {
+            color: #64748b;
+            font-size: 0.8rem;
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .prod-price-lux {
+            font-weight: 800;
+            color: #059669;
+            font-size: 1rem;
+        }
+
+        /* Modern Badges */
+        .badge-lux {
+            padding: 0.4em 0.8em;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            display: inline-block;
+        }
+
+        .bg-lux-success { background: #dcfce7; color: #166534; }
+        .bg-lux-danger { background: #fee2e2; color: #991b1b; }
+        .bg-lux-warning { background: #fef3c7; color: #92400e; }
+        .bg-lux-info { background: #e0f2fe; color: #075985; }
+        .bg-lux-neutral { background: #f1f5f9; color: #475569; }
+
+        /* Stock Status */
+        .stock-ok { color: #10b981; font-weight: 700; }
+        .stock-low { color: #f59e0b; font-weight: 700; }
+        .stock-warning { color: #ef4444; font-weight: 700; }
+
+        .spec-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: none;
+            transition: all 0.2s;
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-edit { background: #3b82f6; box-shadow: 0 2px 4px rgba(59,130,246,0.2); }
+        .btn-edit:hover { background: #2563eb; transform: translateY(-2px); color: white;}
+
+        .btn-toggle { background: #64748b; box-shadow: 0 2px 4px rgba(100,116,139,0.2); }
+        .btn-toggle:hover { background: #475569; transform: translateY(-2px); color: white;}
+
+        .btn-delete { background: #ef4444; box-shadow: 0 2px 4px rgba(239,68,68,0.2); }
+        .btn-delete:hover { background: #dc2626; transform: translateY(-2px); color: white;}
+
+    </style>
 }
 
-<div class="page-header">
-    <h2>Quản lý sản phẩm</h2>
-    <a href="/Products/Create" class="btn btn-light btn-sm"><i class="fas fa-plus me-1"></i>Thêm mới</a>
+<div class="page-header-lux">
+    <div>
+        <h2>Kho sản phẩm</h2>
+        <div class="text-white-50 mt-1"><i class="fa-solid fa-boxes-stacked me-2"></i>Quản lý danh sách, tồn kho và trạng thái.</div>
+    </div>
+    <a href="/Products/Create" class="btn-lux-light">
+        <i class="fas fa-plus"></i> Thêm mới
+    </a>
 </div>
 
-<!-- THỐNG KÊ -->
-<div class="row">
-    <div class="col-md-3">
-        <div class="stats-card">
-            <h4>@ViewBag.TotalProducts</h4>
-            <p>Tổng sản phẩm</p>
-        </div>
+<!-- STATS CARDS -->
+<div class="stats-grid">
+    <div class="stat-card-lux" style="--stat-color: #3b82f6;">
+        <i class="fa-solid fa-box stat-icon-lux"></i>
+        <div class="stat-value-lux">@ViewBag.TotalProducts</div>
+        <div class="stat-label-lux">Tổng sản phẩm</div>
     </div>
 
-    <div class="col-md-3">
-        <div class="stats-card">
-            <h4>@ViewBag.ActiveProducts</h4>
-            <p>Hiển thị</p>
-        </div>
+    <div class="stat-card-lux" style="--stat-color: #10b981;">
+        <i class="fa-solid fa-eye stat-icon-lux"></i>
+        <div class="stat-value-lux">@ViewBag.ActiveProducts</div>
+        <div class="stat-label-lux">Đang hiển thị</div>
     </div>
 
-    <div class="col-md-3">
-        <div class="stats-card">
-            <h4>@ViewBag.HiddenProducts</h4>
-            <p>Đã ẩn</p>
-        </div>
+    <div class="stat-card-lux" style="--stat-color: #64748b;">
+        <i class="fa-solid fa-eye-slash stat-icon-lux"></i>
+        <div class="stat-value-lux">@ViewBag.HiddenProducts</div>
+        <div class="stat-label-lux">Đã ẩn</div>
     </div>
 
-    <div class="col-md-3">
-        <div class="stats-card">
-            <h4>@ViewBag.OutOfStockProducts</h4>
-            <p>Hết hàng</p>
-        </div>
+    <div class="stat-card-lux" style="--stat-color: #ef4444;">
+        <i class="fa-solid fa-triangle-exclamation stat-icon-lux"></i>
+        <div class="stat-value-lux text-danger">@ViewBag.OutOfStockProducts</div>
+        <div class="stat-label-lux">Hết hàng</div>
     </div>
 </div>
 
-<!-- SEARCH -->
-<div class="mb-3">
-    <input type="text" id="searchInput" class="form-control" placeholder="Tìm sản phẩm...">
-</div>
+<!-- DATA TABLE -->
+<div class="table-card">
+    <div class="table-toolbar">
+        <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" class="search-input-lux" placeholder="Tìm kiếm theo tên, ID..." autocomplete="off">
+        </div>
+    </div>
 
-<!-- TABLE -->
-<div class="product-table">
-    <table class="table table-hover" id="productsTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Ảnh</th>
-                <th>Tên</th>
-                <th>Thương hiệu</th>
-                <th>Danh mục</th>
-                <th>Tồn kho</th>
-                <th>Giá</th>
-                <th>Cấu hình</th>
-                <th>Màu</th>
-                <th>Trạng thái</th>
-                <th>Hành động</th>
-            </tr>
-        </thead>
+    <div class="table-responsive">
+        <table class="table-lux" id="productsTable">
+            <thead>
+                <tr>
+                    <th class="ps-4">Sản Phẩm</th>
+                    <th>Thương Hiệu & DM</th>
+                    <th>Tồn Kho</th>
+                    <th>Giá Bán</th>
+                    <th>Cấu Hình</th>
+                    <th>Biến Thể</th>
+                    <th>Trạng Thái</th>
+                    <th class="text-end pe-4">Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
+                        <td class="ps-4">
+                            <div class="d-flex align-items-center gap-3">
+                                @if (!string.IsNullOrEmpty(p.ImageUrl))
+                                {
+                                    <img src="@p.ImageUrl" class="prod-img-lux" alt="@p.ProductName" loading="lazy" />
+                                }
+                                else
+                                {
+                                    <div class="prod-img-placeholder"><i class="fa-solid fa-image"></i></div>
+                                }
+                                <div>
+                                    <div class="prod-name-lux">@p.ProductName</div>
+                                    <div class="prod-desc-lux" title="@p.Description">@p.Description</div>
+                                    <div class="badge-lux bg-lux-neutral mt-1">ID: #@p.ProductId</div>
+                                </div>
+                            </div>
+                        </td>
 
-        <tbody>
-        @foreach (var p in Model)
-        {
-            var qty = p.Quantity;
+                        <td>
+                            <div class="fw-bold text-dark">@p.Brand?.BrandName</div>
+                            <div class="text-muted small">@p.Category?.CategoryName</div>
+                        </td>
 
-            <tr>
-                <td>@p.ProductId</td>
+                        <td>
+                            @if (p.Quantity <= 0)
+                            {
+                                <span class="stock-warning"><i class="fa-solid fa-xmark me-1"></i>Hết</span>
+                            }
+                            else if (p.Quantity <= 10)
+                            {
+                                <span class="stock-low"><i class="fa-solid fa-exclamation me-1"></i>@p.Quantity</span>
+                            }
+                            else
+                            {
+                                <span class="stock-ok"><i class="fa-solid fa-check me-1"></i>@p.Quantity</span>
+                            }
+                        </td>
 
-                <!-- IMAGE -->
-                <td>
-                    @if (!string.IsNullOrEmpty(p.ImageUrl))
-                    {
-                        <img src="@p.ImageUrl" class="product-image" />
-                    }
-                    else
-                    {
-                        <div class="product-image bg-light text-center">No</div>
-                    }
-                </td>
+                        <td>
+                            <div class="prod-price-lux">@p.Price.ToString("N0") ₫</div>
+                        </td>
 
-                <!-- NAME -->
-                <td>
-                    <strong>@p.ProductName</strong><br />
-                    <small>@p.Description</small>
-                </td>
+                        <td>
+                            <ul class="spec-list">
+                                <li><strong>CPU:</strong> @p.CPU</li>
+                                <li><strong>RAM:</strong> @p.RAM</li>
+                                <li><strong>SSD:</strong> @p.Storage</li>
+                            </ul>
+                        </td>
 
-                <!-- BRAND -->
-                <td>@p.Brand?.BrandName</td>
+                        <td>
+                            <div class="d-flex flex-wrap gap-1" style="max-width: 150px;">
+                                @if (p.Colors != null && p.Colors.Any())
+                                {
+                                    foreach (var c in p.Colors)
+                                    {
+                                        <span class="badge-lux bg-lux-info">@c.ColorName</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="text-muted small">-</span>
+                                }
+                            </div>
+                        </td>
 
-                <!-- CATEGORY -->
-                <td>@p.Category?.CategoryName</td>
+                        <td>
+                            @if (p.Status == 1)
+                            {
+                                <span class="badge-lux bg-lux-success"><i class="fa-solid fa-globe me-1"></i>Hiển thị</span>
+                            }
+                            else
+                            {
+                                <span class="badge-lux bg-lux-danger"><i class="fa-solid fa-eye-slash me-1"></i>Đã ẩn</span>
+                            }
+                        </td>
 
-                
-<td>
-    @if (p.Quantity <= 0)
-    {
-        <span class="stock-warning">Hết hàng</span>
-    }
-    else if (p.Quantity <= 10)
-    {
-        <span class="stock-low">(@p.Quantity)</span>
-    }
-    else
-    {
-        <span class="stock-ok">@p.Quantity</span>
-    }
-</td>
-
-<td>@p.Price.ToString("N0") ₫</td>
-<!-- SPEC -->
-<td>
-    <small>
-        CPU: @p.CPU <br />
-        RAM: @p.RAM <br />
-        SSD: @p.Storage
-    </small>
-</td>
-
-                <!-- COLORS -->
-                <td>
-                    @if (p.Colors != null && p.Colors.Any())
-                    {
-                        foreach (var c in p.Colors)
-                        {
-                            <span class="badge bg-info text-dark">@c.ColorName</span>
-                        }
-                    }
-                </td>
-
-                <!-- STATUS -->
-                <td>
-                    @if (p.Status == 1)
-                    {
-                        <span class="status-badge status-presently">Hiển thị</span>
-                    }
-                    else
-                    {
-                        <span class="status-badge status-hidden">Ẩn</span>
-                    }
-                </td>
-
-                <!-- ACTION -->
-                <td>
-                    <div class="action-buttons">
-                        <a href="/Products/Edit/@p.ProductId" class="btn btn-warning btn-sm">Sửa</a>
-                        <a href="/Products/ToggleStatus/@p.ProductId" class="btn btn-secondary btn-sm">Ẩn/Hiện</a>
-                        <a href="/Products/Delete/@p.ProductId" class="btn btn-danger btn-sm">Xóa</a>
-                    </div>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
+                        <td class="pe-4 text-end">
+                            <div class="action-btns justify-content-end">
+                                <a href="/Products/Edit/@p.ProductId" class="btn-icon btn-edit" title="Chỉnh sửa">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <a href="/Products/ToggleStatus/@p.ProductId" class="btn-icon btn-toggle" title="Ẩn/Hiện">
+                                    <i class="fa-solid fa-power-off"></i>
+                                </a>
+                                <a href="/Products/Delete/@p.ProductId" class="btn-icon btn-delete" title="Xóa" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @section Scripts {
-<script>
-    document.getElementById("searchInput").addEventListener("keyup", function () {
-        var value = this.value.toLowerCase();
-        var rows = document.querySelectorAll("#productsTable tbody tr");
+    <script>
+        // Simple client-side search filtering
+        document.getElementById("searchInput").addEventListener("keyup", function () {
+            let value = this.value.toLowerCase();
+            let rows = document.querySelectorAll("#productsTable tbody tr");
 
-        rows.forEach(row => {
-            row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
+            rows.forEach(row => {
+                let textContent = row.textContent.toLowerCase();
+                if (textContent.includes(value)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
         });
-    });
-</script>
+    </script>
 }

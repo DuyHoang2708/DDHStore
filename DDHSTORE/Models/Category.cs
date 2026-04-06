@@ -1,4 +1,4 @@
-﻿using DDHSTORE.Models;
+using DDHSTORE.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,6 +8,7 @@ namespace DDHSTORE.Models
     public class Category
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("CATEGORY_ID")]
         public int CategoryId { get; set; }
 

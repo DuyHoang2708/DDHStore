@@ -1,4 +1,4 @@
-﻿namespace DDHSTORE.Models;
+namespace DDHSTORE.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class OrderDetail
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Column("ORDER_DETAIL_ID")]
     public int OrderDetailId { get; set; }
 
@@ -21,6 +22,8 @@ public class OrderDetail
     [Column("PRICE")]
     public decimal Price { get; set; }
 
+    [NotMapped]
+    public decimal Subtotal => Price * Quantity;
     public Order Order { get; set; }
     public Product Product { get; set; }
 }
