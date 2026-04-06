@@ -1,0 +1,606 @@
+@model DDHSTORE.Models.Product
+@{
+    ViewData["Title"] = Model.ProductName;
+    var isFav = ViewBag.IsFavorite as bool? ?? false;
+    var relatedProducts = ViewBag.RelatedProducts as List<DDHSTORE.Models.Product> ?? new List<DDHSTORE.Models.Product>();
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    :root {
+        --primary-color: #e74c3c;
+        --primary-hover: #c0392b;
+        --bg-light: #f8f9fa;
+        --text-dark: #2c3e50;
+        --text-muted: #7f8c8d;
+        --border-color: #eee;
+        --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .detail-container {
+        padding: 40px 0;
+        color: var(--text-dark);
+    }
+
+    .breadcrumb-custom {
+        font-size: 0.9rem;
+        margin-bottom: 25px;
+    }
+
+    .breadcrumb-item a {
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .breadcrumb-item a:hover {
+        color: var(--primary-color);
+    }
+
+    /* Column Styles */
+    .product-gallery {
+        background: #fff;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: var(--card-shadow);
+        position: sticky;
+        top: 100px;
+    }
+
+    .main-image-wrapper {
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .main-image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+
+    .main-image:hover {
+        transform: scale(1.05);
+    }
+
+    .product-info-card {
+        padding: 0 20px;
+    }
+
+    .product-brand {
+        display: inline-block;
+        color: var(--primary-color);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+
+    .product-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+        line-height: 1.2;
+    }
+
+    .product-meta-top {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+    }
+
+    .rating-stars {
+        color: #f1c40f;
+    }
+
+    .stock-status {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.8rem;
+    }
+
+    .stock-status.in-stock { background: #e8f5e9; color: #2e7d32; }
+    .stock-status.low-stock { background: #fff3e0; color: #e65100; }
+    .stock-status.out-stock { background: #ffebee; color: #c62828; }
+
+    .price-wrap {
+        margin: 25px 0;
+        padding: 20px;
+        background: #fdf2f2;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .current-price {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    .specs-short {
+        margin-bottom: 25px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .spec-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--bg-light);
+        padding: 12px;
+        border-radius: 10px;
+    }
+
+    .spec-item i {
+        color: var(--primary-color);
+        width: 20px;
+        text-align: center;
+    }
+
+    .spec-label {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        display: block;
+    }
+
+    .spec-value {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .color-selection {
+        margin-bottom: 30px;
+    }
+
+    .color-label {
+        font-weight: 700;
+        margin-bottom: 12px;
+        display: block;
+    }
+
+    .color-options {
+        display: flex;
+        gap: 12px;
+    }
+
+    .color-chip {
+        padding: 8px 16px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+
+    .color-chip:hover {
+        border-color: var(--primary-color);
+    }
+
+    .color-chip.active {
+        border-color: var(--primary-color);
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .action-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .btn-action {
+        height: 55px;
+        border-radius: 12px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s;
+        border: none;
+    }
+
+    .btn-add-cart {
+        background: #fff;
+        border: 2px solid var(--primary-color);
+        color: var(--primary-color);
+        flex: 1;
+    }
+
+    .btn-add-cart:hover {
+        background: var(--primary-color);
+        color: #fff;
+    }
+
+    .btn-buy-now {
+        background: var(--primary-color);
+        color: #fff;
+        flex: 2;
+    }
+
+    .btn-buy-now:hover {
+        background: var(--primary-hover);
+        box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+    }
+
+    .btn-fav-large {
+        width: 55px;
+        background: #fff;
+        border: 2px solid var(--border-color);
+        color: var(--text-muted);
+    }
+
+    .btn-fav-large.active {
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+        background: #fff0f0;
+    }
+
+    /* Tabs & Details */
+    .product-details-extra {
+        margin-top: 60px;
+    }
+
+    .nav-tabs-custom {
+        border-bottom: 2px solid var(--border-color);
+        gap: 40px;
+    }
+
+    .nav-tabs-custom .nav-link {
+        border: none;
+        padding: 15px 0;
+        font-weight: 700;
+        color: var(--text-muted);
+        position: relative;
+        background: none;
+    }
+
+    .nav-tabs-custom .nav-link.active {
+        color: var(--primary-color);
+    }
+
+    .nav-tabs-custom .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--primary-color);
+    }
+
+    .tab-content {
+        padding: 40px 0;
+    }
+
+    .specs-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .specs-table tr {
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .specs-table td {
+        padding: 15px;
+    }
+
+    .specs-table td:first-child {
+        width: 30%;
+        font-weight: 600;
+        background: var(--bg-light);
+        border-radius: 8px 0 0 8px;
+    }
+
+    /* Related Products */
+    .related-section {
+        margin-top: 80px;
+        padding-top: 60px;
+        border-top: 1px solid var(--border-color);
+    }
+</style>
+
+<div class="container detail-container">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-custom">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/Home/Products">Sản phẩm</a></li>
+            <li class="breadcrumb-item active">@Model.ProductName</li>
+        </ol>
+    </nav>
+
+    <div class="row g-5">
+        <!-- Gallery -->
+        <div class="col-lg-5">
+            <div class="product-gallery">
+                <div class="main-image-wrapper">
+                    <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "https://via.placeholder.com/500x500?text=No+Image" : Model.ImageUrl)" 
+                         class="main-image" id="mainImage" alt="@Model.ProductName" />
+                </div>
+                
+                @if (Model.Quantity <= 0)
+                {
+                    <div class="text-center">
+                        <span class="stock-status out-stock"><i class="fa-solid fa-circle-xmark me-1"></i>Hết hàng</span>
+                    </div>
+                }
+                else if (Model.Quantity <= 5)
+                {
+                    <div class="text-center">
+                        <span class="stock-status low-stock"><i class="fa-solid fa-triangle-exclamation me-1"></i>Chỉ còn @Model.Quantity sản phẩm</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center">
+                        <span class="stock-status in-stock"><i class="fa-solid fa-circle-check me-1"></i>Sẵn sàng giao ngay</span>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Info -->
+        <div class="col-lg-7">
+            <div class="product-info-card">
+                <span class="product-brand">@(Model.Brand?.BrandName ?? "Generic")</span>
+                <h1 class="product-title">@Model.ProductName</h1>
+                
+                <div class="product-meta-top">
+                    <div class="rating-stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                        <span class="ms-1 text-muted">(4.5/5)</span>
+                    </div>
+                    <span class="text-muted">|</span>
+                    <span class="text-muted"><i class="fa-solid fa-eye me-1"></i> 1,248 lượt xem</span>
+                </div>
+
+                <div class="price-wrap">
+                    <div>
+                        <span class="current-price">@Model.Price.ToString("N0") đ</span>
+                    </div>
+                    <div class="text-end">
+                        <small class="text-muted d-block">Giá đã bao gồm VAT</small>
+                    </div>
+                </div>
+
+                <div class="specs-short">
+                    @if (!string.IsNullOrEmpty(Model.CPU))
+                    {
+                        <div class="spec-item">
+                            <i class="fa-solid fa-microchip"></i>
+                            <div>
+                                <span class="spec-label">Vi xử lý (CPU)</span>
+                                <span class="spec-value">@Model.CPU</span>
+                            </div>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.RAM))
+                    {
+                        <div class="spec-item">
+                            <i class="fa-solid fa-memory"></i>
+                            <div>
+                                <span class="spec-label">Bộ nhớ RAM</span>
+                                <span class="spec-value">@Model.RAM</span>
+                            </div>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Storage))
+                    {
+                        <div class="spec-item">
+                            <i class="fa-solid fa-hard-drive"></i>
+                            <div>
+                                <span class="spec-label">Ổ cứng</span>
+                                <span class="spec-value">@Model.Storage</span>
+                            </div>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Screen))
+                    {
+                        <div class="spec-item">
+                            <i class="fa-solid fa-display"></i>
+                            <div>
+                                <span class="spec-label">Màn hình</span>
+                                <span class="spec-value">@Model.Screen</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                @if (Model.Colors != null && Model.Colors.Any())
+                {
+                    <div class="color-selection">
+                        <span class="color-label">Màu sắc khả dụng:</span>
+                        <div class="color-options">
+                            @foreach (var color in Model.Colors)
+                            {
+                                <div class="color-chip">@color.ColorName</div>
+                            }
+                        </div>
+                    </div>
+                }
+
+                <div class="action-group">
+                    <button class="btn-action btn-fav-large @(isFav ? "active" : "")" 
+                            id="btnFavLarge" data-id="@Model.ProductId">
+                        <i class="fa-@(isFav ? "solid" : "regular") fa-heart"></i>
+                    </button>
+                    
+                    @if (Model.Quantity > 0)
+                    {
+                        <button class="btn-action btn-add-cart" onclick="addToCartAjax(@Model.ProductId)">
+                            <i class="fa-solid fa-cart-plus"></i> Thêm giỏ hàng
+                        </button>
+                        <a href="@Url.Action("Index", "Checkout", new { productId = Model.ProductId, quantity = 1 })" 
+                           class="btn-action btn-buy-now">
+                            Mua ngay
+                        </a>
+                    }
+                    else
+                    {
+                        <button class="btn-action btn-buy-now w-100" style="background:#bdc3c7; cursor:not-allowed;" disabled>
+                            Hết hàng - Liên hệ 0374899316
+                        </button>
+                    }
+                </div>
+
+                <div class="mt-4 p-3 border rounded-3 bg-light d-flex align-items-center gap-3">
+                    <i class="fa-solid fa-truck-fast fa-2x text-primary"></i>
+                    <div>
+                        <div class="fw-bold">Miễn phí giao hàng toàn quốc</div>
+                        <small class="text-muted">Nhận hàng trong 2-3 ngày làm việc</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Extra Details -->
+    <div class="product-details-extra">
+        <ul class="nav nav-tabs nav-tabs-custom" id="detailTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button">Thông số kĩ thuật</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc" type="button">Mô tả sản phẩm</button>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="specs">
+                <table class="specs-table">
+                    @if (!string.IsNullOrEmpty(Model.CPU)) { <tr><td>Vi xử lý (CPU)</td><td>@Model.CPU</td></tr> }
+                    @if (!string.IsNullOrEmpty(Model.RAM)) { <tr><td>Bộ nhớ RAM</td><td>@Model.RAM</td></tr> }
+                    @if (!string.IsNullOrEmpty(Model.Storage)) { <tr><td>Ổ cứng</td><td>@Model.Storage</td></tr> }
+                    @if (!string.IsNullOrEmpty(Model.Screen)) { <tr><td>Màn hình</td><td>@Model.Screen</td></tr> }
+                    @if (!string.IsNullOrEmpty(Model.OS)) { <tr><td>Hệ điều hành</td><td>@Model.OS</td></tr> }
+                    @if (!string.IsNullOrEmpty(Model.Battery)) { <tr><td>Pin</td><td>@Model.Battery</td></tr> }
+                    @if (Model.Category != null) { <tr><td>Danh mục</td><td>@Model.Category.CategoryName</td></tr> }
+                    @if (Model.Brand != null) { <tr><td>Thương hiệu</td><td>@Model.Brand.BrandName</td></tr> }
+                </table>
+            </div>
+            <div class="tab-pane fade" id="desc">
+                <div class="lh-lg">
+                    @if (!string.IsNullOrEmpty(Model.Description))
+                    {
+                        @Html.Raw(Model.Description.Replace("\n", "<br/>"))
+                    }
+                    else
+                    {
+                        <p class="text-muted italic">Đang cập nhật nội dung mô tả sản phẩm...</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Products -->
+    @if (relatedProducts.Any())
+    {
+        <div class="related-section">
+            <h3 class="fw-800 mb-4">Sản phẩm liên quan</h3>
+            <div class="row g-4">
+                @foreach (var item in relatedProducts)
+                {
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 border-0 shadow-sm" style="border-radius:12px; overflow:hidden;">
+                            <a href="@Url.Action("ProductDetail", "Home", new { id = item.ProductId })" style="text-decoration:none; color:inherit;">
+                                <div style="aspect-ratio:1/1; padding:15px; display:flex; align-items:center; justify-content:center;">
+                                    <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "https://via.placeholder.com/200x200" : item.ImageUrl)" 
+                                         class="card-img-top" style="max-height:100%; object-fit:contain;" alt="@item.ProductName">
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title text-truncate fw-bold mb-1">@item.ProductName</h6>
+                                    <div class="text-danger fw-bold">@item.Price.ToString("N0") đ</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Color selection
+            $('.color-chip').click(function() {
+                $('.color-chip').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            // Favorite Toggle
+            $('#btnFavLarge').click(function() {
+                var btn = $(this);
+                var productId = btn.data("id");
+                var icon = btn.find('i');
+
+                $.ajax({
+                    url: "/Favorites/Toggle",
+                    type: "POST",
+                    data: { productId: productId },
+                    success: function (res) {
+                        if (res.status === "added") {
+                            btn.addClass("active");
+                            icon.removeClass('fa-regular').addClass('fa-solid');
+                        }
+                        else if (res.status === "removed") {
+                            btn.removeClass("active");
+                            icon.removeClass('fa-solid').addClass('fa-regular');
+                        }
+                        else {
+                            window.location.href = "/Account/Login";
+                        }
+                    },
+                    error: function () {
+                        window.location.href = "/Account/Login";
+                    }
+                });
+            });
+        });
+
+        // Cart functions usually global, ensure they exist
+        function addToCartAjax(id) {
+            $.ajax({
+                url: '/Cart/AddAjax',
+                type: 'POST',
+                data: { id: id },
+                success: function(res) {
+                    if (res.success) {
+                        alert(res.message);
+                        // Refresh count if possible
+                        if (typeof updateCartCount === 'function') updateCartCount();
+                    } else {
+                        if (res.message === "Chưa đăng nhập") {
+                            window.location.href = '/Account/Login';
+                        } else {
+                            alert(res.message);
+                        }
+                    }
+                },
+                error: function() {
+                    alert('Lỗi khi thêm vào giỏ hàng');
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,35 @@
+﻿@model DDHSTORE.Models.Order
+@{
+    ViewData["Title"] = "Mua ngay";
+    var product = ViewBag.Product as DDHSTORE.Models.Product;
+    int userId = ViewBag.UserId;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="card mb-3" style="max-width: 600px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="@product.ImageUrl" class="img-fluid rounded-start" alt="@product.ProductName">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@product.ProductName</h5>
+                <p class="card-text">Giá: @product.Price.ToString("C")</p>
+                <form asp-action="Create" method="post">
+                    <input type="hidden" name="userId" value="@userId" />
+                    <input type="hidden" name="productId" value="@product.ProductId" />
+
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Số lượng</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" value="1" min="1" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-bolt"></i> Mua ngay
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

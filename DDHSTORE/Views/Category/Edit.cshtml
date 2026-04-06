@@ -1,0 +1,60 @@
+@model DDHSTORE.Models.Category
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "Sửa danh mục";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    var statusList = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Hiện", Value = "1" },
+        new SelectListItem { Text = "Ẩn", Value = "0" }
+    };
+
+    foreach (var item in statusList)
+    {
+        if (item.Value == Model.Status.ToString())
+        {
+            item.Selected = true;
+            break;
+        }
+    }
+}
+
+<div class="ddh-page-title mb-3">
+    <div>
+        <h2>Sửa danh mục</h2>
+        <div class="ddh-subtitle">Cập nhật tên và trạng thái hiển thị</div>
+    </div>
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="fa-solid fa-arrow-left me-1"></i> Quay lại
+    </a>
+</div>
+
+<div class="ddh-card p-4">
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="CategoryId" />
+
+        <div class="mb-3">
+            <label asp-for="CategoryName" class="form-label fw-bold">Tên danh mục</label>
+            <input asp-for="CategoryName" class="form-control" />
+            <span asp-validation-for="CategoryName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Trạng thái</label>
+            <select asp-for="Status" class="form-select" asp-items="statusList"></select>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-ddh">
+                <i class="fa-solid fa-floppy-disk me-1"></i> Cập nhật
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

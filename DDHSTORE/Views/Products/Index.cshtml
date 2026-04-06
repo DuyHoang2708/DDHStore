@@ -1,0 +1,234 @@
+﻿@model IEnumerable<DDHSTORE.Models.Product>
+
+@{
+    ViewData["Title"] = "Quản lý sản phẩm";
+   Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section Styles {
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+    }
+
+    .stats-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .product-table {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .product-image {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .status-badge {
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+    }
+
+    .status-presently {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .status-hidden {
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    .stock-ok { color: green; }
+    .stock-low { color: orange; }
+    .stock-warning { color: red; }
+
+    .action-buttons {
+        display: flex;
+        gap: 5px;
+    }
+</style>
+}
+
+<div class="page-header">
+    <h2>Quản lý sản phẩm</h2>
+    <a href="/Products/Create" class="btn btn-light btn-sm"><i class="fas fa-plus me-1"></i>Thêm mới</a>
+</div>
+
+<!-- THỐNG KÊ -->
+<div class="row">
+    <div class="col-md-3">
+        <div class="stats-card">
+            <h4>@ViewBag.TotalProducts</h4>
+            <p>Tổng sản phẩm</p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stats-card">
+            <h4>@ViewBag.ActiveProducts</h4>
+            <p>Hiển thị</p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stats-card">
+            <h4>@ViewBag.HiddenProducts</h4>
+            <p>Đã ẩn</p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stats-card">
+            <h4>@ViewBag.OutOfStockProducts</h4>
+            <p>Hết hàng</p>
+        </div>
+    </div>
+</div>
+
+<!-- SEARCH -->
+<div class="mb-3">
+    <input type="text" id="searchInput" class="form-control" placeholder="Tìm sản phẩm...">
+</div>
+
+<!-- TABLE -->
+<div class="product-table">
+    <table class="table table-hover" id="productsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ảnh</th>
+                <th>Tên</th>
+                <th>Thương hiệu</th>
+                <th>Danh mục</th>
+                <th>Tồn kho</th>
+                <th>Giá</th>
+                <th>Cấu hình</th>
+                <th>Màu</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var p in Model)
+        {
+            var qty = p.Quantity;
+
+            <tr>
+                <td>@p.ProductId</td>
+
+                <!-- IMAGE -->
+                <td>
+                    @if (!string.IsNullOrEmpty(p.ImageUrl))
+                    {
+                        <img src="@p.ImageUrl" class="product-image" />
+                    }
+                    else
+                    {
+                        <div class="product-image bg-light text-center">No</div>
+                    }
+                </td>
+
+                <!-- NAME -->
+                <td>
+                    <strong>@p.ProductName</strong><br />
+                    <small>@p.Description</small>
+                </td>
+
+                <!-- BRAND -->
+                <td>@p.Brand?.BrandName</td>
+
+                <!-- CATEGORY -->
+                <td>@p.Category?.CategoryName</td>
+
+                
+<td>
+    @if (p.Quantity <= 0)
+    {
+        <span class="stock-warning">Hết hàng</span>
+    }
+    else if (p.Quantity <= 10)
+    {
+        <span class="stock-low">(@p.Quantity)</span>
+    }
+    else
+    {
+        <span class="stock-ok">@p.Quantity</span>
+    }
+</td>
+
+<td>@p.Price.ToString("N0") ₫</td>
+<!-- SPEC -->
+<td>
+    <small>
+        CPU: @p.CPU <br />
+        RAM: @p.RAM <br />
+        SSD: @p.Storage
+    </small>
+</td>
+
+                <!-- COLORS -->
+                <td>
+                    @if (p.Colors != null && p.Colors.Any())
+                    {
+                        foreach (var c in p.Colors)
+                        {
+                            <span class="badge bg-info text-dark">@c.ColorName</span>
+                        }
+                    }
+                </td>
+
+                <!-- STATUS -->
+                <td>
+                    @if (p.Status == 1)
+                    {
+                        <span class="status-badge status-presently">Hiển thị</span>
+                    }
+                    else
+                    {
+                        <span class="status-badge status-hidden">Ẩn</span>
+                    }
+                </td>
+
+                <!-- ACTION -->
+                <td>
+                    <div class="action-buttons">
+                        <a href="/Products/Edit/@p.ProductId" class="btn btn-warning btn-sm">Sửa</a>
+                        <a href="/Products/ToggleStatus/@p.ProductId" class="btn btn-secondary btn-sm">Ẩn/Hiện</a>
+                        <a href="/Products/Delete/@p.ProductId" class="btn btn-danger btn-sm">Xóa</a>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+<script>
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        var value = this.value.toLowerCase();
+        var rows = document.querySelectorAll("#productsTable tbody tr");
+
+        rows.forEach(row => {
+            row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
+        });
+    });
+</script>
+}

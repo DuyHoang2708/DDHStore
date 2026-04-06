@@ -1,0 +1,101 @@
+@model List<DDHSTORE.Models.Product>
+@{
+    ViewData["Title"] = "Sản phẩm";
+    var q = ViewBag.Query as string;
+}
+
+<div class="ddh-page-title mt-4 mb-3">
+    <div>
+        <h2>Sản phẩm</h2>
+        <div class="ddh-subtitle">
+            @if (!string.IsNullOrWhiteSpace(q))
+            {
+                <span>Kết quả cho từ khóa: <span class="fw-bold" style="color: var(--ddh-brand);">@q</span></span>
+            }
+            else
+            {
+                <span>Khám phá các sản phẩm đang mở bán</span>
+            }
+        </div>
+    </div>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">
+        <i class="fa-solid fa-house me-1"></i> Trang chủ
+    </a>
+</div>
+
+<div class="ddh-card p-3">
+    @if (Model != null && Model.Any())
+    {
+        <div class="row g-3">
+            @foreach (var p in Model)
+            {
+                var qty = p.Quantity;
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="card h-100 border-0" style="border-radius: 16px;">
+                        <a href="@Url.Action("ProductDetail", "Home", new { id = p.ProductId })" style="display:block; text-decoration:none;">
+                            <div class="p-3" style="aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:16px;position:relative;">
+                                @if (qty <= 0)
+                                {
+                                    <span class="badge bg-danger" style="position:absolute;top:12px;left:12px;border-radius:999px;padding:6px 10px;">
+                                        <i class="fa-solid fa-xmark me-1"></i> Hết hàng
+                                    </span>
+                                }
+                                else if (qty <= 5)
+                                {
+                                    <span class="badge bg-warning text-dark" style="position:absolute;top:12px;left:12px;border-radius:999px;padding:6px 10px;">
+                                        <i class="fa-solid fa-triangle-exclamation me-1"></i> Sắp hết
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success" style="position:absolute;top:12px;left:12px;border-radius:999px;padding:6px 10px;">
+                                        <i class="fa-solid fa-check me-1"></i> Còn hàng
+                                    </span>
+                                }
+                                <img src="@(string.IsNullOrEmpty(p.ImageUrl) ? "https://via.placeholder.com/300x200?text=No+Image" : p.ImageUrl)"
+                                     alt="@p.ProductName"
+                                     style="max-width:100%;max-height:100%;object-fit:contain;" />
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <div class="fw-bold" style="line-height:1.3;min-height:2.6rem;">
+                                <a href="@Url.Action("ProductDetail", "Home", new { id = p.ProductId })" style="text-decoration:none; color:inherit;">
+                                    @p.ProductName
+                                </a>
+                            </div>
+                            <div class="text-muted small mt-1">
+                                @(p.Category?.CategoryName ?? "-") · @(p.Brand?.BrandName ?? "-")
+                            </div>
+                            <div class="mt-2 fw-bold" style="color: var(--ddh-brand); font-size: 1.1rem;">
+                                @p.Price.ToString("N0") đ
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pt-0 pb-3 px-3">
+                            @if (qty > 0)
+                            {
+                                <button type="button" class="btn btn-soft w-100" onclick="addToCartAjax(@p.ProductId)">
+                                    <i class="fa-solid fa-cart-shopping me-1"></i> Thêm vào giỏ
+                                </button>
+                            }
+                            else
+                            {
+                                <a href="https://zalo.me/0xXXXXXXXX" target="_blank" class="btn btn-warning w-100" style="font-size: 13px; font-weight: 700;">
+                                    <i class="fa-solid fa-phone me-1"></i> Hết hàng - Liên hệ
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center text-muted py-5">
+            <i class="fa-solid fa-magnifying-glass fa-2x mb-3"></i>
+            <div class="fw-bold">Không tìm thấy sản phẩm phù hợp.</div>
+            <div>Hãy thử từ khóa khác.</div>
+        </div>
+    }
+</div>
+
