@@ -2,8 +2,13 @@
 <html lang="vi">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewData["Title"] - DDHSTORE</title>
+    <title>@ViewData["Title"] - DDHSTORE Premium</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -18,103 +23,105 @@
 
 <body>
     @* Lấy session username *@
-   @using DDHSTORE.Helpers
-@{
-    var isLoggedIn = User.Identity.IsAuthenticated;
-    var username = User.Identity.Name;
-    var cart = Context.Session.GetObjectFromJson<List<DDHSTORE.Models.Cart>>("Cart") ?? new List<DDHSTORE.Models.Cart>();
-    var cartCount = cart.Sum(c => c.Quantity);
-    var q = Context.Request.Query["q"].ToString();
-}
+    @using DDHSTORE.Helpers
+    @{
+        var isLoggedIn = User.Identity.IsAuthenticated;
+        var username = User.Identity.Name;
+        var cart = Context.Session.GetObjectFromJson<List<DDHSTORE.Models.Cart>>("Cart") ?? new List<DDHSTORE.Models.Cart>();
+        var cartCount = cart.Sum(c => c.Quantity);
+        var q = Context.Request.Query["q"].ToString();
+    }
 
-    <!-- HEADER -->
-    <header class="ddh-header">
+    <!-- HEADER NAVIGATION -->
+    <header class="ddh-header shadow-sm">
         <div class="ddh-topbar">
-            <div class="container py-3">
-                <div class="row g-2 align-items-center">
-                    <div class="col-12 col-lg-3">
+            <div class="container py-2">
+                <div class="row align-items-center g-3">
+                    
+                    <!-- BRANDING -->
+                    <div class="col-12 col-lg-3 text-center text-lg-start">
                         <a class="ddh-logo" href="/">
                             <span class="ddh-logo-mark"><i class="fa-solid fa-bolt"></i></span>
                             <span class="ddh-logo-text">DDHSTORE</span>
                         </a>
                     </div>
 
+                    <!-- SEARCH BAR -->
                     <div class="col-12 col-lg-5">
-                        <form class="ddh-search" asp-controller="Home" asp-action="Products" method="get" role="search">
-                            <i class="fa-solid fa-magnifying-glass ddh-search-icon" aria-hidden="true"></i>
+                        <form class="ddh-search position-relative" asp-controller="Home" asp-action="Products" method="get" role="search">
+                            <i class="fa-solid fa-magnifying-glass ddh-search-icon"></i>
                             <input type="text"
                                    class="form-control ddh-search-input"
                                    name="q"
                                    value="@q"
-                                   placeholder="Tìm sản phẩm, thương hiệu..."
+                                   placeholder="Hôm nay bạn cần tìm gì? (Laptop, iPhone...)"
                                    autocomplete="off" />
-                            <button type="submit" class="btn btn-ddh ddh-search-btn">
-                                Tìm
+                            <button type="submit" class="btn ddh-search-btn shadow-sm">
+                                Tìm kiếm
                             </button>
                         </form>
                     </div>
 
+                    <!-- ACTIONS MENU -->
                     <div class="col-12 col-lg-4">
-                        <div class="ddh-actions justify-content-lg-end">
+                        <div class="ddh-actions justify-content-center justify-content-lg-end">
 
-                <!-- USER -->
-                @if (isLoggedIn)
-                {
-                            <div class="dropdown">
-                                <a class="ddh-action ddh-action-user dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-solid fa-user"></i>
-                                    <span class="ddh-action-label">@username</span>
-                                </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item" asp-controller="Account" asp-action="Profile">
-                                    <i class="fa fa-id-card"></i> Thông tin cá nhân
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
-                                    <i class="fa-solid fa-box-open"></i> Đơn hàng của tôi
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" asp-controller="Account" asp-action="EditProfile">
-                                    <i class="fa fa-pen-to-square"></i> Chỉnh sửa thông tin
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">
-                                    <i class="fa fa-key"></i> Đổi mật khẩu
-                                </a>
-                            </li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <a class="dropdown-item text-danger" asp-controller="Account" asp-action="Logout">
-                                    <i class="fa fa-sign-out-alt"></i> Đăng xuất
-                                </a>
-                            </li>
-                        </ul>
-                            </div>
-                }
-                else
-                {
-                    <a asp-controller="Account" asp-action="Login">
-                                <span class="ddh-action">
-                                    <i class="fa-solid fa-right-to-bracket"></i>
+                            <!-- USER ACCOUNT -->
+                            @if (isLoggedIn)
+                            {
+                                <div class="dropdown">
+                                    <a class="ddh-action dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-circle-user text-primary"></i>
+                                        <span class="ddh-action-label">@username</span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end mt-2 animate slideIn">
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Account" asp-action="Profile">
+                                                <i class="fa-regular fa-id-badge"></i> Quản lý hồ sơ
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
+                                                <i class="fa-solid fa-box-open"></i> Đơn hàng của tôi
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Account" asp-action="EditProfile">
+                                                <i class="fa-regular fa-pen-to-square"></i> Cập nhật thông tin
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">
+                                                <i class="fa-solid fa-key"></i> Đổi mật khẩu
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a class="dropdown-item text-danger" asp-controller="Account" asp-action="Logout">
+                                                <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            }
+                            else
+                            {
+                                <a asp-controller="Account" asp-action="Login" class="ddh-action">
+                                    <i class="fa-solid fa-user-shield text-primary"></i>
                                     <span class="ddh-action-label">Đăng nhập</span>
-                                </span>
-                    </a>
-                }
+                                </a>
+                            }
 
-                <!-- HEART -->
-                            <a href="/Favorites/MyFavorites" class="ddh-action">
-                                <i class="fa-regular fa-heart"></i>
-                                <span class="ddh-action-label">Yêu thích</span>
+                            <!-- FAVORITES -->
+                            <a href="/Favorites/MyFavorites" class="ddh-action" title="Sản phẩm Yêu thích">
+                                <i class="fa-regular fa-heart text-danger"></i>
+                                <span class="ddh-action-label d-lg-none d-xl-inline">Yêu thích</span>
                             </a>
 
-                <!-- CART -->
-                            <a href="/Cart" class="ddh-action ddh-action-cart" style="position: relative;">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <span class="ddh-action-label">Giỏ hàng</span>
+                            <!-- SHOPPING CART -->
+                            <a href="/Cart" class="ddh-action position-relative" title="Giỏ hàng">
+                                <i class="fa-solid fa-cart-shopping text-warning" style="color: #f59e0b !important;"></i>
+                                <span class="ddh-action-label d-lg-none d-xl-inline">Giỏ hàng</span>
                                 <span class="ddh-cart-badge" id="cart-badge-count" style="@(cartCount == 0 ? "display:none" : "")">@cartCount</span>
                             </a>
                         </div>
@@ -123,79 +130,89 @@
             </div>
         </div>
 
-    <!-- MENU -->
-    <nav class="ddh-menu">
-        <div class="container">
-            <a href="/">Trang chủ</a>
-            <a asp-controller="Home" asp-action="Products">Sản phẩm</a>
-            <a href="#">Điện thoại</a>
-            <a href="#">Laptop</a>
-            <a href="#">Phụ kiện</a>
-            <a href="#">Khuyến mãi</a>
-        </div>
-    </nav>
+        <!-- SECONDARY NAV MENU -->
+        <nav class="ddh-menu">
+            <div class="container">
+                <div class="d-flex gx-4">
+                    <a href="/" class="pe-4"><i class="fa-solid fa-house me-2 text-muted"></i>Trang chủ</a>
+                    <a asp-controller="Home" asp-action="Products" class="pe-4"><i class="fa-solid fa-layer-group me-2 text-muted"></i>Tất cả sản phẩm</a>
+                    <a href="/Home/Products?q=điện+thoại" class="pe-4"><i class="fa-solid fa-mobile-screen-button me-2 text-muted"></i>Smartphones</a>
+                    <a href="/Home/Products?q=laptop" class="pe-4"><i class="fa-solid fa-laptop me-2 text-muted"></i>Laptops / PC</a>
+                    <a href="/Home/Products?q=phụ+kiện" class="pe-4"><i class="fa-solid fa-headphones me-2 text-muted"></i>Phụ kiện</a>
+                    <a href="#" class="pe-4 text-primary"><i class="fa-solid fa-fire-flame-curved me-2"></i>Khuyến mãi Hot</a>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <!-- TOAST NOTIFICATION (global) -->
-    <div id="global-toast" style="position:fixed;top:20px;right:20px;z-index:9999;min-width:300px;"></div>
+    <div id="global-toast" style="position:fixed;top:80px;right:20px;z-index:9999;min-width:320px;"></div>
 
-    <!-- BODY -->
-    <div class="container mt-4">
+    <!-- MAIN BODY -->
+    <main class="container py-5 min-vh-100">
         @RenderBody()
-    </div>
+    </main>
 
     <!-- FOOTER -->
-    <footer class="ddh-footer mt-5">
-        <div class="container py-5">
-            <div class="row g-4">
-                <div class="col-12 col-md-4">
-                    <div class="ddh-footer-col ddh-footer-brand">
+    <footer class="ddh-footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-12 col-md-5 col-lg-4">
+                    <div class="ddh-footer-col ddh-footer-brand h-100">
                         <div class="ddh-footer-logo">
                             <span class="ddh-logo-mark"><i class="fa-solid fa-bolt"></i></span>
                             <span class="ddh-logo-text">DDHSTORE</span>
                         </div>
                         <div class="ddh-footer-desc">
-                            Website bán hàng công nghệ uy tín. Sản phẩm chính hãng, giao hàng nhanh, hỗ trợ tận tâm.
+                            Chúng tôi cam kết cung cấp các sản phẩm công nghệ chính hãng với chất lượng dịch vụ tốt nhất. Trải nghiệm mua sắm đẳng cấp, tiện lợi và an toàn.
                         </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2">
-                    <div class="ddh-footer-col">
-                        <div class="ddh-footer-title">Hỗ trợ</div>
-                        <a class="ddh-footer-link" href="#">Liên hệ</a>
-                        <a class="ddh-footer-link" href="#">Bảo hành</a>
-                        <a class="ddh-footer-link" href="#">Đổi trả</a>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="ddh-footer-col">
-                        <div class="ddh-footer-title">Danh mục</div>
-                        <a class="ddh-footer-link" href="#">Điện thoại</a>
-                        <a class="ddh-footer-link" href="#">Laptop</a>
-                        <a class="ddh-footer-link" href="#">Phụ kiện</a>
-                    </div>
-                </div>
-                <div class="col-12 col-md-3">
-                    <div class="ddh-footer-col">
-                        <div class="ddh-footer-title">Kết nối</div>
-                        <div class="ddh-footer-social">
+                        <div class="ddh-footer-social mt-4">
                             <a class="ddh-social" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                             <a class="ddh-social" href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                             <a class="ddh-social" href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                            <a class="ddh-social" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                         </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-2 ms-lg-auto">
+                    <div class="ddh-footer-col">
+                        <h4 class="ddh-footer-title">Dịch Vụ</h4>
+                        <a class="ddh-footer-link" href="#">Chính sách bảo hành</a>
+                        <a class="ddh-footer-link" href="#">Chính sách đổi trả</a>
+                        <a class="ddh-footer-link" href="#">Hướng dẫn mua hàng</a>
+                        <a class="ddh-footer-link" href="#">Hướng dẫn thanh toán</a>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="ddh-footer-col">
+                        <h4 class="ddh-footer-title">Sản Phẩm</h4>
+                        <a class="ddh-footer-link" href="#">Điện thoại thông minh</a>
+                        <a class="ddh-footer-link" href="#">Laptop Sinh viên</a>
+                        <a class="ddh-footer-link" href="#">Phụ kiện Apple</a>
+                        <a class="ddh-footer-link" href="#">Hàng công nghệ cũ</a>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-3">
+                    <div class="ddh-footer-col">
+                        <h4 class="ddh-footer-title">Tổng đài hỗ trợ</h4>
+                        <div class="ddh-footer-desc">Hỗ trợ nhanh chóng qua Hotline (Miễn phí cước) hoạt động 24/7.</div>
                         <div class="ddh-footer-hotline mt-auto">
-                            <div class="text-white-50 small">Hotline</div>
-                            <div class="fw-bold">1900 0000</div>
+                            <div class="small"><i class="fa-solid fa-headset me-2"></i>Chăm sóc khách hàng</div>
+                            <div class="fw-bold">0374 899 316</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="ddh-footer-bottom mt-4 pt-3">
-                <div>© @DateTime.Now.Year DDHSTORE. All rights reserved.</div>
-                <div class="ddh-footer-mini">
-                    <a class="ddh-footer-mini-link" href="#">Chính sách</a>
-                    <span class="text-white-50">·</span>
-                    <a class="ddh-footer-mini-link" href="#">Điều khoản</a>
+
+            <div class="ddh-footer-bottom">
+                <div>© @DateTime.Now.Year <strong>DDHSTORE</strong>. All rights reserved. Vận hành bởi System Admin.</div>
+                <div class="d-flex gap-3">
+                    <a class="ddh-footer-mini-link" href="#">Quy chế hoạt động</a>
+                    <span class="text-secondary opacity-50">|</span>
+                    <a class="ddh-footer-mini-link" href="#">Chính sách bảo mật</a>
                 </div>
             </div>
         </div>
@@ -211,6 +228,10 @@
             if (badge) {
                 badge.textContent = count;
                 badge.style.display = count > 0 ? '' : 'none';
+                
+                // Add pop animation
+                badge.style.transform = 'scale(1.5)';
+                setTimeout(() => badge.style.transform = 'scale(1)', 300);
             }
         }
 
@@ -218,14 +239,20 @@
         function showGlobalToast(message, type) {
             var container = document.getElementById('global-toast');
             if (!container) return;
-            var icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-xmark';
-            container.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible fade show shadow" role="alert" style="border-radius:12px;font-weight:500;">' +
-                '<i class="fa-solid ' + icon + ' me-2"></i> ' + message +
-                '<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
+            var icon = type === 'success' ? 'fa-circle-check text-success' : 'fa-circle-xmark text-danger';
+            var border = type === 'success' ? 'border-success' : 'border-danger';
+            
+            container.innerHTML = `
+                <div class="alert bg-white border-start border-4 ${border} alert-dismissible fade show shadow-lg" role="alert" style="border-radius:12px; font-weight:600; color:#1e293b;">
+                    <i class="fa-solid ${icon} me-2 fs-5 align-middle"></i> 
+                    <span class="align-middle">${message}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>`;
+                
             setTimeout(function() {
                 var alerts = container.querySelectorAll('.alert');
                 alerts.forEach(function(a) { try { new bootstrap.Alert(a).close(); } catch(e){} });
-            }, 3000);
+            }, 4000);
         }
 
         // Global: add to cart via AJAX
@@ -245,7 +272,7 @@
                 }
             })
             .catch(function(err) {
-                showGlobalToast('Có lỗi xảy ra!', 'danger');
+                showGlobalToast('Có lỗi xảy ra kết nối!', 'danger');
             });
         }
     </script>

@@ -61,16 +61,16 @@ namespace DDHSTORE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CancelOrder(int id)
         {
-            // S? d?ng th?ng nh?t h‡m GetUserId
+            // S? d?ng th?ng nh?t h√†m GetUserId
             var userId = GetUserId();
 
-            // N?u khÙng tÏm th?y ID ng??i d˘ng trong Identity
+            // N?u kh√¥ng t√¨m th?y ID ng??i d√πng trong Identity
             if (userId == null)
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            // TÏm ??n h‡ng thu?c v? user ?Û
+            // T√¨m ??n h√†ng thu?c v? user ?√≥
             var order = await _context.Orders
                 .FirstOrDefaultAsync(o => o.OrderId == id && o.UserId == userId);
 
@@ -85,11 +85,11 @@ namespace DDHSTORE.Controllers
                 _context.Update(order);
                 await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] = $"??n h‡ng #{id} ?„ ???c h?y th‡nh cÙng.";
+                TempData["SuccessMessage"] = $"??n h√†ng #{id} ?√£ ???c h?y th√†nh c√¥ng.";
             }
             else
             {
-                TempData["ErrorMessage"] = "KhÙng th? h?y ??n h‡ng n‡y.";
+                TempData["ErrorMessage"] = "Kh√¥ng th? h?y ??n h√†ng n√†y.";
             }
 
             return RedirectToAction(nameof(Index));

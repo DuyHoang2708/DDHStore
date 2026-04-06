@@ -4,3 +4,4 @@ obj/
 *.user
 *.suo
 *.cachegit rm -r --cached .
+appsettings.Development.json

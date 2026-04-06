@@ -3,6 +3,8 @@ using DDHSTORE.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ClosedXML.Excel;
+using System.IO;
 
 namespace DDHSTORE.Controllers
 {
@@ -49,6 +51,53 @@ namespace DDHSTORE.Controllers
                 .ToListAsync();
 
             return View(recentOrders);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExportRevenue()
+        {
+            var completedOrders = await _context.Orders
+                .Include(o => o.User)
+                .Where(o => o.Status == "COMPLETED")
+                .OrderBy(o => o.OrderDate)
+                .ToListAsync();
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("DoanhThu");
+                var currentRow = 1;
+
+                // Header
+                worksheet.Cell(currentRow, 1).Value = "Mã Đơn Hàng";
+                worksheet.Cell(currentRow, 2).Value = "Khách Hàng";
+                worksheet.Cell(currentRow, 3).Value = "Ngày Đặt";
+                worksheet.Cell(currentRow, 4).Value = "Tổng Tiền";
+                worksheet.Cell(currentRow, 5).Value = "Trạng Thái";
+
+                worksheet.Row(currentRow).Style.Font.Bold = true;
+
+                // Data
+                foreach (var order in completedOrders)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = $"#ORD-{order.OrderId}";
+                    worksheet.Cell(currentRow, 2).Value = order.User?.Username ?? "Khách lẻ";
+                    worksheet.Cell(currentRow, 3).Value = order.OrderDate.ToString("dd/MM/yyyy HH:mm");
+                    worksheet.Cell(currentRow, 4).Value = order.TotalAmount;
+                    worksheet.Cell(currentRow, 5).Value = order.Status;
+                }
+
+                // Format amount column
+                worksheet.Column(4).Style.NumberFormat.Format = "#,##0 ₫";
+                worksheet.Columns().AdjustToContents();
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"BaoCaoDoanhThu_{DateTime.Now:yyyyMMddHHmmss}.xlsx");
+                }
+            }
         }
     }
 }

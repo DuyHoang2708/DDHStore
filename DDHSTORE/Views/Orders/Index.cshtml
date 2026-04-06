@@ -107,19 +107,19 @@
                                                     <div class="modal-dialog modal-dialog-centered modal-sm">
                                                         <div class="modal-content border-0 shadow-lg rounded-4">
                                                             <div class="modal-body text-center p-4">
-                                                                <div class="mb-3 text-danger">
-                                                                    <i class="fa-solid fa-circle-exclamation fa-3.5x"></i>
-                                                                </div>
-                                                                <h5 class="fw-bold text-dark">Hủy đơn hàng?</h5>
-                                                                <p class="small text-muted mb-4">Bạn chắc chắn muốn hủy đơn hàng <strong>#@item.OrderId</strong>? Hành động này không thể hoàn tác.</p>
-                                                                
-                                                                <form asp-action="CancelOrder" asp-route-id="@item.OrderId" method="post">
-                                                                    @Html.AntiForgeryToken()
-                                                                    <div class="d-grid gap-2">
-                                                                        <button type="submit" class="btn btn-danger rounded-pill fw-bold py-2">Xác nhận hủy</button>
-                                                                        <button type="button" class="btn btn-light rounded-pill fw-medium py-2" data-bs-dismiss="modal">Quay lại</button>
-                                                                    </div>
-                                                                </form>
+                                                                 <div class="mb-3 text-danger">
+                                                                     <i class="fa-solid fa-circle-exclamation fa-3.5x"></i>
+                                                                 </div>
+                                                                 <h5 class="fw-bold text-dark">Hủy đơn hàng?</h5>
+                                                                 <p class="small text-muted mb-4">Bạn chắc chắn muốn hủy đơn hàng <strong>#@item.OrderId</strong>? Hành động này không thể hoàn tác.</p>
+                                                                 
+                                                                 <form asp-action="CancelOrder" asp-route-id="@item.OrderId" method="post">
+                                                                     @Html.AntiForgeryToken()
+                                                                     <div class="d-grid gap-2">
+                                                                         <button type="submit" class="btn btn-danger rounded-pill fw-bold py-2">Xác nhận hủy</button>
+                                                                         <button type="button" class="btn btn-light rounded-pill fw-medium py-2" data-bs-dismiss="modal">Quay lại</button>
+                                                                     </div>
+                                                                 </form>
                                                             </div>
                                                         </div>
                                                     </div>

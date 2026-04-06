@@ -36,14 +36,14 @@ builder.Services.AddAuthentication(options =>
 })
 .AddGoogle(options =>
 {
-    options.ClientId = "463249022960-88iimqur32vrkrbrhul6ulh542ok3udc.apps.googleusercontent.com";
-    options.ClientSecret = "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";
+    options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
 
     options.Events.OnRedirectToAuthorizationEndpoint = context =>
     {
         var redirectUri = context.RedirectUri;
 
-        // 🔥 ép Google hiện chọn account
+        // ép Google chọn account
         if (!redirectUri.Contains("prompt="))
         {
             redirectUri += "&prompt=select_account";
@@ -53,7 +53,6 @@ builder.Services.AddAuthentication(options =>
         return Task.CompletedTask;
     };
 })
-
 .AddFacebook(options =>
 {
     options.AppId = "YOUR_FACEBOOK_APP_ID";

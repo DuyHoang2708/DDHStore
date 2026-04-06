@@ -24,7 +24,6 @@ public class OrderDetail
 
     [NotMapped]
     public decimal Subtotal => Price * Quantity;
-
     public Order Order { get; set; }
     public Product Product { get; set; }
 }

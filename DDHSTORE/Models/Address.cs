@@ -9,7 +9,9 @@ namespace DDHSTORE.Models
     public class Address
     {
         [Key]
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         [Column("ADDRESS_ID")]
         public int AddressId { get; set; }
 

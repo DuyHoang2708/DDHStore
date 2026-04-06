@@ -15,129 +15,149 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     @RenderSection("Styles", required: false)
     <style>
-            body {
-                background: #f9fafb;
-                font-family: "Segoe UI", Roboto, Helvetica, sans-serif;
-            }
+        body {
+            background: #f8fafc;
+            font-family: 'Inter', "Segoe UI", Roboto, Helvetica, sans-serif;
+            color: #334155;
+        }
 
+        /* Modern Premium Sidebar */
+        .sidebar-admin {
+            min-height: 100vh;
+            background: #0f172a; /* Slate 900 */
+            color: #94a3b8; /* Slate 400 */
+            border-right: 1px solid #1e293b;
+            box-shadow: 4px 0 24px rgba(15, 23, 42, 0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            width: 280px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-admin .sidebar-header {
+            font-size: 1.25rem;
+            font-weight: 800;
+            padding: 2rem 1.5rem 1.5rem;
+            text-align: center;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            border-bottom: 1px solid #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-admin .sidebar-header div {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        .sidebar-admin .sidebar-header i {
+            color: #3b82f6; /* Blue 500 */
+        }
+
+        .sidebar-admin .nav-link {
+            color: #94a3b8;
+            border-radius: 12px;
+            margin: 0.25rem 1rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+            padding: 0.85rem 1.25rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar-admin .nav-link:hover {
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.05);
+            transform: translateX(4px);
+        }
+
+        .sidebar-admin .nav-link.active {
+            color: #ffffff;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transform: translateX(0);
+        }
+
+        .sidebar-admin .nav-link i {
+            width: 24px;
+            font-size: 1.1rem;
+            margin-right: 12px;
+            text-align: center;
+        }
+
+        .sidebar-admin .user-info {
+            padding: 1.5rem 1rem;
+            margin-top: auto;
+            border-top: 1px solid #1e293b;
+            background: #0b1120;
+        }
+
+        .sidebar-admin .user-info .fa-user-circle {
+            font-size: 2.2rem;
+            margin-right: 12px;
+            color: #3b82f6;
+        }
+
+        .sidebar-admin .user-info span {
+            color: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .sidebar-admin .logout-btn {
+            margin-top: 1rem;
+            width: 100%;
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 10px;
+            font-weight: 600;
+            padding: 0.6rem;
+            transition: all 0.2s;
+        }
+
+        .sidebar-admin .logout-btn:hover {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+        }
+
+        footer {
+            background: transparent;
+            color: #64748b;
+        }
+
+        main.content {
+            background: transparent;
+            padding: 2.5rem;
+            margin-left: 280px;
+            min-height: calc(100vh - 60px);
+        }
+
+        /* Mobile Adjustments */
+        @@media (max-width: 991.98px) {
             .sidebar-admin {
-                min-height: 100vh;
-                background: #ffffff;
-                color: #333;
-                border-right: 1px solid #e0e0e0;
-                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.03);
                 position: fixed;
-                top: 0;
-                left: 0;
-                z-index: 1000;
-                width: 280px;
+                left: -280px;
             }
 
-                .sidebar-admin .sidebar-header {
-                    font-size: 1.4rem;
-                    font-weight: 600;
-                    padding: 2rem 1rem 1rem;
-                    text-align: center;
-                    color: #dc3545;
-                }
-
-                    .sidebar-admin .sidebar-header div {
-                        font-size: 0.9rem;
-                        font-weight: 400;
-                        opacity: 0.8;
-                    }
-
-                .sidebar-admin .nav-link {
-                    color: #555;
-                    border-radius: 8px;
-                    margin: 4px 0;
-                    font-weight: 500;
-                    transition: all 0.2s;
-                    padding: 10px 15px;
-                }
-
-                    .sidebar-admin .nav-link.active,
-                    .sidebar-admin .nav-link:hover {
-                        color: #dc3545;
-                        background-color: #fdf2f2;
-                    }
-
-                    .sidebar-admin .nav-link i {
-                        width: 22px;
-                        text-align: center;
-                        margin-right: 10px;
-                    }
-
-                .sidebar-admin .user-info {
-                    padding: 1.5rem 1rem;
-                    border-top: 1px solid #e0e0e0;
-                    margin-top: auto;
-                }
-
-                    .sidebar-admin .user-info .fa-user-circle {
-                        font-size: 2rem;
-                        margin-right: 10px;
-                        color: #dc3545;
-                    }
-
-                .sidebar-admin .logout-btn {
-                    margin-top: 1rem;
-                    width: 100%;
-                }
-
-            footer {
-                background: #ffffff;
-                border-top: 1px solid #e6e9f0;
+            .sidebar-admin.show {
+                left: 0;
             }
 
             main.content {
-                background: #fff;
-                border-radius: 10px;
-                padding: 2rem;
-                margin: 1rem;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-                margin-left: 300px;
+                margin-left: 0;
+                padding: 1.5rem;
             }
 
-            .dropdown-menu {
-                font-size: 0.95rem;
+            footer {
+                margin-left: 0 !important;
             }
-
-            @@media (max-width: 991.98px) {
-                .sidebar-admin {
-                    position: relative;
-                    width: 100%;
-                    min-height: auto;
-                }
-            
-                main.content {
-                    margin-left: 1rem;
-                }
-            
-                footer {
-                    margin-left: 1rem !important;
-                }
-            }
-        
-            @@media (max-width: 768px) {
-                .sidebar-admin {
-                    position: fixed;
-                    left: -280px;
-                    transition: left 0.3s ease;
-                }
-            
-                    .sidebar-admin.show {
-                        left: 0;
-                    }
-            
-                main.content {
-                    margin-left: 1rem;
-                }
-            
-                footer {
-                    margin-left: 1rem !important;
-                }
-            }
+        }
     </style>
 </head>
 <body>

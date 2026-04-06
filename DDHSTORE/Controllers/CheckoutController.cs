@@ -1,4 +1,5 @@
 using DDHSTORE.Data;
+using DDHSTORE.Helpers;
 using DDHSTORE.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ namespace DDHSTORE.Controllers
     public class CheckoutController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public CheckoutController(AppDbContext context)
+        public CheckoutController(AppDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         private int? GetUserId()
@@ -231,8 +234,142 @@ namespace DDHSTORE.Controllers
 
             await _context.SaveChangesAsync();
 
+            // ===== XỬ LÝ VNPAY =====
+            if (model.PaymentMethod == "VNPay")
+            {
+                var vnpay = new VnPayLibrary();
+                var vnp_TmnCode = _configuration["VnPay:TmnCode"];
+                var vnp_HashSecret = _configuration["VnPay:HashSecret"];
+                var vnp_BaseUrl = _configuration["VnPay:BaseUrl"];
+                var vnp_ReturnUrl = _configuration["VnPay:ReturnUrl"];
+
+                // Số tiền VNPay yêu cầu nhân 100 (đơn vị VND x100)
+                var vnpAmount = (long)(totalAmount * 100);
+
+                vnpay.AddRequestData("vnp_Version", "2.1.0");
+                vnpay.AddRequestData("vnp_Command", "pay");
+                vnpay.AddRequestData("vnp_TmnCode", vnp_TmnCode ?? "");
+                vnpay.AddRequestData("vnp_Amount", vnpAmount.ToString());
+                vnpay.AddRequestData("vnp_CurrCode", "VND");
+                vnpay.AddRequestData("vnp_TxnRef", order.OrderId.ToString());
+                vnpay.AddRequestData("vnp_OrderInfo", $"Thanh toan don hang #{order.OrderId}");
+                vnpay.AddRequestData("vnp_OrderType", "other");
+                vnpay.AddRequestData("vnp_Locale", "vn");
+                vnpay.AddRequestData("vnp_ReturnUrl", vnp_ReturnUrl ?? "");
+                vnpay.AddRequestData("vnp_IpAddr", GetIpAddress());
+                vnpay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
+
+                var paymentUrl = vnpay.CreateRequestUrl(vnp_BaseUrl ?? "", vnp_HashSecret ?? "");
+                return Redirect(paymentUrl);
+            }
+
+            // COD: redirect thẳng tới Success
             TempData["SuccessMessage"] = "Đơn hàng đã được đặt thành công!";
             return RedirectToAction("Success", new { id = order.OrderId });
+        }
+
+        // GET: VNPay Callback
+        [HttpGet]
+        public async Task<IActionResult> VnPayCallback()
+        {
+            var vnpay = new VnPayLibrary();
+            var vnp_HashSecret = _configuration["VnPay:HashSecret"];
+
+            // Lấy tất cả query params từ VNPay trả về
+            foreach (var (key, value) in Request.Query)
+            {
+                if (!string.IsNullOrEmpty(key) && key.StartsWith("vnp_"))
+                {
+                    vnpay.AddResponseData(key, value.ToString());
+                }
+            }
+
+            // Lấy thông tin kết quả
+            var vnp_orderId = vnpay.GetResponseData("vnp_TxnRef");
+            var vnp_TransactionId = vnpay.GetResponseData("vnp_TransactionNo");
+            var vnp_SecureHash = Request.Query["vnp_SecureHash"].ToString();
+            var vnp_ResponseCode = vnpay.GetResponseData("vnp_ResponseCode");
+            var vnp_TransactionStatus = vnpay.GetResponseData("vnp_TransactionStatus");
+
+            // Validate chữ ký
+            bool isValidSignature = vnpay.ValidateSignature(vnp_SecureHash, vnp_HashSecret ?? "");
+
+            if (isValidSignature)
+            {
+                if (int.TryParse(vnp_orderId, out int orderId))
+                {
+                    var payment = await _context.Payments.FirstOrDefaultAsync(p => p.OrderId == orderId);
+                    var order = await _context.Orders.FindAsync(orderId);
+
+                    if (vnp_ResponseCode == "00" && vnp_TransactionStatus == "00")
+                    {
+                        // Thanh toán thành công
+                        if (payment != null)
+                        {
+                            payment.Status = "PAID";
+                            payment.PaymentDate = DateTime.Now;
+                        }
+                        if (order != null)
+                        {
+                            order.Status = "PROCESSING";
+                        }
+                        await _context.SaveChangesAsync();
+
+                        TempData["SuccessMessage"] = "Thanh toán VNPay thành công!";
+                        return RedirectToAction("Success", new { id = orderId });
+                    }
+                    else
+                    {
+                        // Thanh toán thất bại — hoàn lại tồn kho
+                        if (payment != null)
+                        {
+                            payment.Status = "FAILED";
+                        }
+                        if (order != null)
+                        {
+                            order.Status = "CANCELLED";
+
+                            // Hoàn lại tồn kho
+                            var orderDetails = await _context.OrderDetails
+                                .Where(od => od.OrderId == orderId)
+                                .ToListAsync();
+                            foreach (var detail in orderDetails)
+                            {
+                                var product = await _context.Products.FindAsync(detail.ProductId);
+                                if (product != null)
+                                {
+                                    product.Quantity += detail.Quantity;
+                                }
+                            }
+                        }
+                        await _context.SaveChangesAsync();
+
+                        TempData["ErrorMessage"] = "Thanh toán VNPay thất bại. Đơn hàng đã bị hủy.";
+                        return RedirectToAction("PaymentFailed", new { id = orderId });
+                    }
+                }
+            }
+
+            TempData["ErrorMessage"] = "Chữ ký không hợp lệ. Giao dịch bị từ chối.";
+            return RedirectToAction("PaymentFailed");
+        }
+
+        // GET: Payment Failed
+        [HttpGet]
+        public async Task<IActionResult> PaymentFailed(int? id)
+        {
+            ViewBag.ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "Thanh toán không thành công.";
+            
+            if (id.HasValue)
+            {
+                var order = await _context.Orders
+                    .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Product)
+                    .FirstOrDefaultAsync(o => o.OrderId == id);
+                return View(order);
+            }
+
+            return View();
         }
 
         private async Task<IActionResult> ReloadCheckoutView(CheckoutViewModel model, int userId)
@@ -268,6 +405,28 @@ namespace DDHSTORE.Controllers
             if (order == null) return NotFound();
 
             return View(order);
+        }
+
+        /// <summary>
+        /// Lấy IP Address của client
+        /// </summary>
+        private string GetIpAddress()
+        {
+            try
+            {
+                var ipAddress = HttpContext.Connection.RemoteIpAddress;
+                if (ipAddress != null)
+                {
+                    if (ipAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+                    {
+                        ipAddress = System.Net.Dns.GetHostEntry(ipAddress).AddressList
+                            .FirstOrDefault(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+                    }
+                    return ipAddress?.ToString() ?? "127.0.0.1";
+                }
+            }
+            catch { }
+            return "127.0.0.1";
         }
     }
 }
